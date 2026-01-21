@@ -84,7 +84,7 @@ h1, .apply-btn { font-family: 'Impact', 'Charcoal', sans-serif; }
 .caption { margin-top: 20px; font-family: sans-serif; font-weight: bold; font-size: 1.2rem; opacity: 0.8; }
 
 
-/* 3. [UPGRADED] 커리큘럼 섹션 - 스포트라이트 효과 */
+/* 3. 커리큘럼 섹션 (스포트라이트) */
 .curriculum-section {
     background-color: #EAE8E0;
     padding: 150px 20px;
@@ -124,7 +124,7 @@ h1, .apply-btn { font-family: 'Impact', 'Charcoal', sans-serif; }
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: all 0.3s ease; /* 전체 트랜지션 */
+    transition: all 0.3s ease;
 }
 
 /* 개별 아이템 */
@@ -138,16 +138,16 @@ h1, .apply-btn { font-family: 'Impact', 'Charcoal', sans-serif; }
     width: 100%;
     transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     cursor: pointer;
+    /* 모바일 좌우 여백 확보 */
+    padding: 0 10px;
 }
 
-/* === [SPOTLIGHT EFFECT] === */
-/* 어떤 아이템이 active되면, 형제 아이템들은 흐려짐 */
+/* 스포트라이트 효과 (형제 흐리기) */
 .timeline-list.has-active .timeline-item:not(.active) {
-    opacity: var(--dim-opacity) !important; /* 흐리게 */
-    filter: blur(3px); /* 블러 효과 */
-    transform: scale(0.95); /* 살짝 작아짐 */
+    opacity: var(--dim-opacity) !important;
+    filter: blur(3px);
+    transform: scale(0.95);
 }
-
 
 .item-header {
     display: flex;
@@ -193,14 +193,14 @@ h1, .apply-btn { font-family: 'Impact', 'Charcoal', sans-serif; }
     font-size: 2.2rem;
     color: #1a1a1a;
     text-transform: uppercase;
-    line-height: 1;
+    line-height: 1.1; /* 줄간격 조정 */
     margin: 0;
     letter-spacing: -1px;
-    white-space: nowrap;
+    white-space: nowrap; /* PC에서는 한 줄 */
     transition: all 0.5s ease;
 }
 
-/* 설명 래퍼 (애니메이션용) */
+/* 설명 래퍼 */
 .desc-wrapper {
     display: flex;
     align-items: center;
@@ -221,24 +221,23 @@ h1, .apply-btn { font-family: 'Impact', 'Charcoal', sans-serif; }
     padding-left: 0;
 }
 
-
-/* === [ACTIVE STATE] === */
+/* ACTIVE 상태 */
 .timeline-item.active .curr-number {
     background-color: var(--accent-color);
     color: #fff;
     border-color: var(--accent-color);
-    transform: scale(1.1); /* 강조 */
+    transform: scale(1.1);
 }
 
 .timeline-item.active h3 {
     color: var(--accent-color);
-    transform: scale(1.05); /* 제목 살짝 커짐 */
+    transform: scale(1.05);
 }
 
 .timeline-item.active .desc-wrapper {
     max-width: 500px;
     opacity: 1;
-    border-left: 2px solid var(--accent-color); /* 빨간 선 긋기 */
+    border-left: 2px solid var(--accent-color);
     padding-left: 20px;
 }
 
@@ -247,7 +246,7 @@ h1, .apply-btn { font-family: 'Impact', 'Charcoal', sans-serif; }
 }
 
 
-/* 4. 지원하기 (JOIN THE CREW) */
+/* 4. 지원하기 */
 .apply-section { background-color: #1a1a1a; color: #fff; align-items: center; z-index: 10; }
 .apply-container { text-align: center; opacity: 0; transform: scale(0.9); }
 .recruit-info { font-family: sans-serif; font-size: 1.2rem; margin-bottom: 30px; opacity: 0.8; letter-spacing: 2px;}
@@ -266,15 +265,48 @@ h1, .apply-btn { font-family: 'Impact', 'Charcoal', sans-serif; }
 .right { text-align: right; }
 .contact { margin-bottom: 5px; color: #fff; }
 
+
+/* === 모바일 대응 (글자 잘림 해결) === */
 @media (max-width: 768px) {
-    .item-body { flex-direction: column; gap: 10px; }
+    /* 폰 트랙 간격 축소 */
+    .iphone-mockup { width: 220px; height: 450px; }
+    .phones-track { gap: 30px; }
+
+    /* 커리큘럼 섹션 모바일 최적화 */
+    .item-body { 
+        flex-direction: column; 
+        gap: 10px; 
+    }
+    
+    .timeline-item h3 {
+        white-space: normal; /* [중요] 줄바꿈 허용 */
+        word-break: keep-all; /* 단어 단위로 줄바꿈 */
+        font-size: 1.8rem; /* 모바일에서 폰트 크기 줄임 */
+        line-height: 1.2;
+    }
+
     .timeline-item.active .desc-wrapper { 
         max-width: 100%; 
         border-left: none; 
-        border-top: 2px solid var(--accent-color);
+        border-top: 2px solid var(--accent-color); /* 선을 위쪽으로 이동 */
         padding-left: 0;
-        padding-top: 10px;
+        padding-top: 15px;
         justify-content: center;
     }
-    .item-desc { text-align: center; }
+    
+    .item-desc { 
+        white-space: normal; /* 설명글 줄바꿈 허용 */
+        text-align: center; 
+        font-size: 0.95rem;
+    }
+
+    /* 지원 버튼 모바일 최적화 */
+    .apply-btn { 
+        font-size: 2rem; /* 버튼 글씨 크기 줄임 */
+        padding: 20px 30px; 
+        white-space: nowrap; /* 버튼은 한 줄 유지 */
+    }
+    
+    .footer-row { flex-direction: column; gap: 30px; text-align: center; }
+    .right { text-align: center; }
 }
