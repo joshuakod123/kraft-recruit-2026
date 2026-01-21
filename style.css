@@ -1,6 +1,7 @@
 :root {
     --bg-color: #EAE8E0;
     --text-color: #1a1a1a;
+    --accent-color: #990000; /* 고려대 크림슨 */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -43,14 +44,13 @@ body {
 @keyframes bounce { 0%, 100% {transform: translateY(0);} 50% {transform: translateY(-10px);} }
 
 
-/* 2. [수정됨] 앱 섹션 */
+/* 2. 앱 섹션 */
 .app-section {
     background-color: #e6e4dc;
-    overflow: hidden; /* 가로 스크롤바 방지 */
+    overflow: hidden;
     justify-content: center;
-    padding: 0; /* 패딩 제거 */
+    padding: 0;
 }
-
 .app-text-wrapper {
     text-align: center; margin-bottom: 40px; z-index: 5;
     padding: 0 20px;
@@ -58,21 +58,16 @@ body {
 .app-text-wrapper h2 { font-size: 4rem; margin-bottom: 10px; }
 .app-text-wrapper p { font-family: sans-serif; font-size: 1.2rem; opacity: 0.7; }
 
-/* 아이폰 트랙 */
 .phones-track {
     display: flex;
-    gap: 50px; /* 아이폰 사이 간격 */
-    width: max-content; /* 내용물만큼 길어짐 */
-    /* CSS 패딩 제거: JS로 위치 완벽 제어 */
+    gap: 50px;
+    width: max-content;
     padding-left: 0; 
 }
-
 .iphone-item {
     display: flex; flex-direction: column; align-items: center;
     flex-shrink: 0;
 }
-
-/* 아이폰 목업 (똑바르게!) */
 .iphone-mockup {
     width: 300px; height: 600px;
     background: #000; border-radius: 45px;
@@ -90,13 +85,80 @@ body {
 .caption { margin-top: 20px; font-family: sans-serif; font-weight: bold; font-size: 1.2rem; opacity: 0.8; }
 
 
-/* 3. 고려대 */
-.ku-section { background-color: #EAE8E0; align-items: center; z-index: 10; }
-.content-wrapper { text-align: center; opacity: 0; transform: translateY(50px); }
-.ku-logo-text { color: #990000; }
-.shield { font-size: 6rem; display: block; margin-bottom: 20px; }
-.ku-logo-text h2 { font-size: 5rem; line-height: 1; letter-spacing: -1px; }
-.subtitle { font-family: sans-serif; font-weight: bold; margin-bottom: 20px; opacity: 0.5; }
+/* 3. [NEW] 커리큘럼 섹션 (수직 타임라인) */
+.curriculum-section {
+    background-color: #EAE8E0;
+    padding: 100px 20px;
+    align-items: center; /* 중앙 정렬 */
+    z-index: 10;
+}
+
+.curr-container {
+    width: 100%; max-width: 800px;
+    position: relative;
+}
+
+/* 제목 스타일 */
+.section-title {
+    font-size: clamp(3rem, 10vw, 6rem);
+    margin-bottom: 80px;
+    text-align: center;
+    line-height: 0.9;
+    letter-spacing: -2px;
+}
+
+/* 타임라인 래퍼 */
+.timeline-wrapper {
+    position: relative;
+    padding-left: 30px; /* 왼쪽에 선이 들어갈 공간 확보 */
+}
+
+/* 수직선 (초기엔 높이 0) */
+.vertical-line {
+    position: absolute;
+    top: 0; left: 0;
+    width: 6px; /* 선 두께 */
+    height: 0%; /* JS로 100% 됨 */
+    background-color: var(--accent-color); /* 고려대 붉은색 */
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(153, 0, 0, 0.3); /* 은은한 발광 */
+}
+
+/* 개별 아이템 */
+.timeline-item {
+    position: relative;
+    margin-bottom: 80px; /* 아이템 간격 */
+    opacity: 0; /* JS로 등장 */
+    transform: translateX(30px);
+}
+.timeline-item:last-child { margin-bottom: 0; }
+
+/* 불렛 포인트 (점) */
+.bullet-point {
+    position: absolute;
+    left: -37px; /* 선 위에 정확히 위치하도록 조정 (-30px - 반지름) */
+    top: 10px;
+    width: 20px; height: 20px;
+    background-color: #000;
+    border: 3px solid var(--accent-color);
+    border-radius: 50%;
+    z-index: 2;
+    transform: scale(0); /* JS로 뽕! 하고 커짐 */
+}
+
+/* 텍스트 내용 */
+.item-content h3 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    line-height: 1;
+}
+.item-content p {
+    font-family: sans-serif;
+    font-size: 1.1rem;
+    color: #555;
+    font-weight: 500;
+}
 
 
 /* 4. 지원하기 */
@@ -110,7 +172,6 @@ body {
 .apply-btn:hover { background-color: #fff; color: #000; transform: translateY(-5px); box-shadow: 0 10px 30px rgba(255,255,255,0.2); }
 .arrow-icon { font-size: 2rem; vertical-align: middle; margin-left: 10px; }
 
-
 /* Footer */
 .footer { background: #000; color: #888; padding: 60px 20px; font-family: sans-serif; font-size: 0.9rem; z-index: 10; }
 .footer-row { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
@@ -121,8 +182,11 @@ body {
 @media (max-width: 768px) {
     .iphone-mockup { width: 220px; height: 450px; }
     .phones-track { gap: 30px; }
-    .ku-logo-text h2 { font-size: 3rem; }
     .apply-btn { font-size: 2.5rem; padding: 20px 40px; }
     .footer-row { flex-direction: column; gap: 30px; text-align: center; }
     .right { text-align: center; }
+    
+    /* 커리큘럼 모바일 대응 */
+    .section-title { font-size: 3.5rem; }
+    .item-content h3 { font-size: 2rem; }
 }
