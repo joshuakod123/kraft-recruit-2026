@@ -2,7 +2,7 @@
     --bg-color: #EAE8E0;
     --text-color: #1a1a1a;
     --accent-color: #990000; /* 고려대 크림슨 */
-    --dim-opacity: 0.2; /* 비활성 아이템 투명도 */
+    --dim-opacity: 0.2; 
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -14,7 +14,7 @@ body {
     overflow-x: hidden;
 }
 
-h1, .apply-btn { font-family: 'Impact', 'Charcoal', sans-serif; }
+h1, .ticket-title { font-family: 'Impact', 'Charcoal', sans-serif; }
 
 .bg-noise {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -84,7 +84,7 @@ h1, .apply-btn { font-family: 'Impact', 'Charcoal', sans-serif; }
 .caption { margin-top: 20px; font-family: sans-serif; font-weight: bold; font-size: 1.2rem; opacity: 0.8; }
 
 
-/* 3. 커리큘럼 섹션 (스포트라이트) */
+/* 3. 커리큘럼 섹션 */
 .curriculum-section {
     background-color: #EAE8E0;
     padding: 150px 20px;
@@ -119,7 +119,7 @@ h1, .apply-btn { font-family: 'Impact', 'Charcoal', sans-serif; }
 @keyframes blink { 0%, 100% {opacity: 1;} 50% {opacity: 0.3;} }
 
 
-/* 리스트 스타일 */
+/* 타임라인 스타일 */
 .timeline-list {
     display: flex;
     flex-direction: column;
@@ -127,7 +127,6 @@ h1, .apply-btn { font-family: 'Impact', 'Charcoal', sans-serif; }
     transition: all 0.3s ease;
 }
 
-/* 개별 아이템 */
 .timeline-item {
     margin-bottom: 60px;
     display: flex;
@@ -138,11 +137,9 @@ h1, .apply-btn { font-family: 'Impact', 'Charcoal', sans-serif; }
     width: 100%;
     transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     cursor: pointer;
-    /* 모바일 좌우 여백 확보 */
     padding: 0 10px;
 }
 
-/* 스포트라이트 효과 (형제 흐리기) */
 .timeline-list.has-active .timeline-item:not(.active) {
     opacity: var(--dim-opacity) !important;
     filter: blur(3px);
@@ -193,14 +190,13 @@ h1, .apply-btn { font-family: 'Impact', 'Charcoal', sans-serif; }
     font-size: 2.2rem;
     color: #1a1a1a;
     text-transform: uppercase;
-    line-height: 1.1; /* 줄간격 조정 */
+    line-height: 1.1;
     margin: 0;
     letter-spacing: -1px;
-    white-space: nowrap; /* PC에서는 한 줄 */
+    white-space: nowrap;
     transition: all 0.5s ease;
 }
 
-/* 설명 래퍼 */
 .desc-wrapper {
     display: flex;
     align-items: center;
@@ -221,7 +217,6 @@ h1, .apply-btn { font-family: 'Impact', 'Charcoal', sans-serif; }
     padding-left: 0;
 }
 
-/* ACTIVE 상태 */
 .timeline-item.active .curr-number {
     background-color: var(--accent-color);
     color: #fff;
@@ -246,16 +241,187 @@ h1, .apply-btn { font-family: 'Impact', 'Charcoal', sans-serif; }
 }
 
 
-/* 4. 지원하기 */
+/* 4. 티켓 스타일 지원하기 섹션 */
 .apply-section { background-color: #1a1a1a; color: #fff; align-items: center; z-index: 10; }
-.apply-container { text-align: center; opacity: 0; transform: scale(0.9); }
-.recruit-info { font-family: sans-serif; font-size: 1.2rem; margin-bottom: 30px; opacity: 0.8; letter-spacing: 2px;}
-.apply-btn {
-    display: inline-block; font-size: 4rem; color: #fff; text-decoration: none;
-    border: 4px solid #fff; padding: 30px 80px; transition: all 0.3s ease; text-transform: uppercase;
+.apply-container { 
+    text-align: center; 
+    opacity: 0; 
+    transform: scale(0.9); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-.apply-btn:hover { background-color: #fff; color: #000; transform: translateY(-5px); box-shadow: 0 10px 30px rgba(255,255,255,0.2); }
-.arrow-icon { font-size: 2rem; vertical-align: middle; margin-left: 10px; }
+
+.recruit-info { font-family: sans-serif; font-size: 1.2rem; margin-bottom: 40px; opacity: 0.8; letter-spacing: 2px;}
+
+/* 티켓 링크 래퍼 */
+.ticket-link {
+    text-decoration: none;
+    display: inline-block;
+    color: #fff;
+    transition: transform 0.3s ease;
+}
+
+.ticket-link:hover {
+    transform: rotate(-2deg) scale(1.02); /* 호버 시 틸트 효과 */
+}
+
+/* 티켓 본체 */
+.ticket {
+    display: flex;
+    background: #000;
+    border: 2px solid #333;
+    border-radius: 20px;
+    width: 800px;
+    height: 300px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+}
+
+.ticket-link:hover .ticket {
+    border-color: var(--accent-color); /* 호버 시 테두리 붉게 */
+}
+
+/* 티켓 왼쪽 (메인) */
+.ticket-left {
+    flex: 2;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 2px dashed #333; /* 점선 */
+    position: relative;
+    background: linear-gradient(135deg, #111 0%, #000 100%);
+}
+
+.ticket-header {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.ticket-title {
+    font-family: 'Impact', sans-serif;
+    font-size: 5rem;
+    line-height: 0.9;
+    text-align: left;
+    color: #fff;
+    margin: 20px 0;
+}
+
+.ticket-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+/* CSS 바코드 */
+.barcode {
+    width: 150px;
+    height: 40px;
+    background-image: linear-gradient(90deg, 
+        #fff 0%, #fff 2%, transparent 2%, transparent 4%,
+        #fff 4%, #fff 8%, transparent 8%, transparent 9%,
+        #fff 9%, #fff 12%, transparent 12%, transparent 14%,
+        #fff 14%, #fff 20%, transparent 20%, transparent 24%,
+        #fff 24%, #fff 26%, transparent 26%, transparent 30%,
+        #fff 30%, #fff 36%, transparent 36%, transparent 38%,
+        #fff 38%, #fff 44%, transparent 44%, transparent 48%,
+        #fff 48%, #fff 52%, transparent 52%, transparent 56%,
+        #fff 56%, #fff 64%, transparent 64%, transparent 68%,
+        #fff 68%, #fff 72%, transparent 72%, transparent 76%,
+        #fff 76%, #fff 80%, transparent 80%, transparent 82%,
+        #fff 82%, #fff 86%, transparent 86%, transparent 90%,
+        #fff 90%, #fff 100%
+    );
+}
+
+/* [NEW] CLICK TO APPLY 스타일 */
+.click-to-apply {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: 700;
+    color: var(--accent-color); /* 붉은색 포인트 */
+    letter-spacing: 2px;
+    font-size: 1rem;
+    animation: blink-red 1.5s infinite; /* 깜빡임 효과 */
+}
+
+@keyframes blink-red {
+    0%, 100% { opacity: 1; text-shadow: 0 0 10px rgba(153, 0, 0, 0.5); }
+    50% { opacity: 0.5; text-shadow: none; }
+}
+
+
+/* 티켓 오른쪽 (스텁) */
+.ticket-right {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    background: #0a0a0a;
+    position: relative;
+}
+
+.date-group {
+    text-align: left;
+}
+
+.date-label {
+    display: block;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 0.8rem;
+    color: #666;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.date-value {
+    display: block;
+    font-family: 'Impact', sans-serif;
+    font-size: 2.2rem;
+    color: #fff;
+    line-height: 1;
+}
+
+.arrow-circle {
+    position: absolute;
+    bottom: 30px; right: 30px;
+    width: 50px; height: 50px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    transition: all 0.3s;
+}
+
+.ticket-link:hover .arrow-circle {
+    background: #fff;
+    color: #000;
+    transform: rotate(45deg);
+}
+
+
+/* 티켓 반원 홈 (Notches) */
+.notch-top, .notch-bottom {
+    position: absolute;
+    width: 30px; height: 30px;
+    background-color: #1a1a1a;
+    border-radius: 50%;
+    left: 66.6%;
+    transform: translateX(-50%);
+    z-index: 5;
+}
+
+.notch-top { top: -15px; box-shadow: inset 0 -2px 5px rgba(0,0,0,0.5); }
+.notch-bottom { bottom: -15px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.5); }
 
 
 /* Footer */
@@ -266,47 +432,51 @@ h1, .apply-btn { font-family: 'Impact', 'Charcoal', sans-serif; }
 .contact { margin-bottom: 5px; color: #fff; }
 
 
-/* === 모바일 대응 (글자 잘림 해결) === */
+/* === 모바일 대응 === */
 @media (max-width: 768px) {
-    /* 폰 트랙 간격 축소 */
     .iphone-mockup { width: 220px; height: 450px; }
     .phones-track { gap: 30px; }
 
-    /* 커리큘럼 섹션 모바일 최적화 */
-    .item-body { 
-        flex-direction: column; 
-        gap: 10px; 
-    }
-    
+    /* 커리큘럼 모바일 */
+    .item-body { flex-direction: column; gap: 10px; }
     .timeline-item h3 {
-        white-space: normal; /* [중요] 줄바꿈 허용 */
-        word-break: keep-all; /* 단어 단위로 줄바꿈 */
-        font-size: 1.8rem; /* 모바일에서 폰트 크기 줄임 */
+        white-space: normal;
+        word-break: keep-all;
+        font-size: 1.8rem;
         line-height: 1.2;
     }
-
     .timeline-item.active .desc-wrapper { 
-        max-width: 100%; 
-        border-left: none; 
-        border-top: 2px solid var(--accent-color); /* 선을 위쪽으로 이동 */
-        padding-left: 0;
-        padding-top: 15px;
-        justify-content: center;
+        max-width: 100%; border-left: none; border-top: 2px solid var(--accent-color);
+        padding-left: 0; padding-top: 15px; justify-content: center;
     }
-    
-    .item-desc { 
-        white-space: normal; /* 설명글 줄바꿈 허용 */
-        text-align: center; 
-        font-size: 0.95rem;
+    .item-desc { white-space: normal; text-align: center; font-size: 0.95rem; }
+
+    /* 티켓 모바일 최적화 */
+    .ticket {
+        width: 100%;
+        max-width: 350px;
+        flex-direction: column;
+        height: auto;
     }
 
-    /* 지원 버튼 모바일 최적화 */
-    .apply-btn { 
-        font-size: 2rem; /* 버튼 글씨 크기 줄임 */
-        padding: 20px 30px; 
-        white-space: nowrap; /* 버튼은 한 줄 유지 */
+    .ticket-left {
+        border-right: none;
+        border-bottom: 2px dashed #333;
+        padding: 30px;
     }
     
+    .ticket-title { font-size: 3.5rem; }
+
+    .ticket-right {
+        padding: 30px;
+        align-items: center;
+        text-align: center;
+    }
+    .date-group { text-align: center; }
+
+    /* 모바일 노치 숨김 (깔끔하게) */
+    .notch-top, .notch-bottom { display: none; }
+
     .footer-row { flex-direction: column; gap: 30px; text-align: center; }
     .right { text-align: center; }
 }
