@@ -2,6 +2,7 @@
     --bg-color: #EAE8E0;
     --text-color: #1a1a1a;
     --accent-color: #990000; /* 고려대 크림슨 */
+    --dim-opacity: 0.2; /* 비활성 아이템 투명도 */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -9,9 +10,11 @@
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
-    font-family: 'Impact', 'Charcoal', sans-serif;
+    font-family: 'Helvetica Neue', 'Arial', sans-serif;
     overflow-x: hidden;
 }
+
+h1, .apply-btn { font-family: 'Impact', 'Charcoal', sans-serif; }
 
 .bg-noise {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -55,18 +58,14 @@ body {
     text-align: center; margin-bottom: 40px; z-index: 5;
     padding: 0 20px;
 }
-.app-text-wrapper h2 { font-size: 4rem; margin-bottom: 10px; }
+.app-text-wrapper h2 { font-family: 'Impact'; font-size: 4rem; margin-bottom: 10px; }
 .app-text-wrapper p { font-family: sans-serif; font-size: 1.2rem; opacity: 0.7; }
 
 .phones-track {
-    display: flex;
-    gap: 50px;
-    width: max-content;
-    padding-left: 0; 
+    display: flex; gap: 50px; width: max-content; padding-left: 0; 
 }
 .iphone-item {
-    display: flex; flex-direction: column; align-items: center;
-    flex-shrink: 0;
+    display: flex; flex-direction: column; align-items: center; flex-shrink: 0;
 }
 .iphone-mockup {
     width: 300px; height: 600px;
@@ -85,83 +84,170 @@ body {
 .caption { margin-top: 20px; font-family: sans-serif; font-weight: bold; font-size: 1.2rem; opacity: 0.8; }
 
 
-/* 3. [NEW] 커리큘럼 섹션 (수직 타임라인) */
+/* 3. [UPGRADED] 커리큘럼 섹션 - 스포트라이트 효과 */
 .curriculum-section {
     background-color: #EAE8E0;
-    padding: 100px 20px;
-    align-items: center; /* 중앙 정렬 */
+    padding: 150px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     z-index: 10;
 }
 
 .curr-container {
-    width: 100%; max-width: 800px;
-    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    text-align: center;
 }
 
-/* 제목 스타일 */
+.section-header { margin-bottom: 80px; }
 .section-title {
-    font-size: clamp(3rem, 10vw, 6rem);
-    margin-bottom: 80px;
-    text-align: center;
+    font-family: 'Impact', sans-serif;
+    font-size: clamp(4rem, 10vw, 7rem);
     line-height: 0.9;
     letter-spacing: -2px;
+    margin-bottom: 10px;
 }
-
-/* 타임라인 래퍼 */
-.timeline-wrapper {
-    position: relative;
-    padding-left: 30px; /* 왼쪽에 선이 들어갈 공간 확보 */
+.section-subtitle {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: var(--accent-color);
+    animation: blink 2s infinite;
 }
+@keyframes blink { 0%, 100% {opacity: 1;} 50% {opacity: 0.3;} }
 
-/* 수직선 (초기엔 높이 0) */
-.vertical-line {
-    position: absolute;
-    top: 0; left: 0;
-    width: 6px; /* 선 두께 */
-    height: 0%; /* JS로 100% 됨 */
-    background-color: var(--accent-color); /* 고려대 붉은색 */
-    border-radius: 3px;
-    box-shadow: 0 0 10px rgba(153, 0, 0, 0.3); /* 은은한 발광 */
+
+/* 리스트 스타일 */
+.timeline-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease; /* 전체 트랜지션 */
 }
 
 /* 개별 아이템 */
 .timeline-item {
-    position: relative;
-    margin-bottom: 80px; /* 아이템 간격 */
-    opacity: 0; /* JS로 등장 */
-    transform: translateX(30px);
-}
-.timeline-item:last-child { margin-bottom: 0; }
-
-/* 불렛 포인트 (점) */
-.bullet-point {
-    position: absolute;
-    left: -37px; /* 선 위에 정확히 위치하도록 조정 (-30px - 반지름) */
-    top: 10px;
-    width: 20px; height: 20px;
-    background-color: #000;
-    border: 3px solid var(--accent-color);
-    border-radius: 50%;
-    z-index: 2;
-    transform: scale(0); /* JS로 뽕! 하고 커짐 */
+    margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0; 
+    transform: translateY(30px);
+    width: 100%;
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    cursor: pointer;
 }
 
-/* 텍스트 내용 */
-.item-content h3 {
-    font-size: 2.5rem;
+/* === [SPOTLIGHT EFFECT] === */
+/* 어떤 아이템이 active되면, 형제 아이템들은 흐려짐 */
+.timeline-list.has-active .timeline-item:not(.active) {
+    opacity: var(--dim-opacity) !important; /* 흐리게 */
+    filter: blur(3px); /* 블러 효과 */
+    transform: scale(0.95); /* 살짝 작아짐 */
+}
+
+
+.item-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-bottom: 10px;
+}
+
+.curr-number {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: rgba(43, 43, 43, 0.5);
+    letter-spacing: 2px;
+    background: #EAE8E0;
+    padding: 5px 10px;
+    z-index: 2;
+    border: 1px solid rgba(43, 43, 43, 0.2);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.line-connector {
+    width: 1px;
+    height: 30px;
+    background-color: #ccc;
+    margin-top: 10px;
+    transition: height 0.3s ease;
+}
+.line-connector.end { display: none; }
+
+.item-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    gap: 30px;
+}
+
+.timeline-item h3 {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: 800;
+    font-size: 2.2rem;
+    color: #1a1a1a;
     text-transform: uppercase;
     line-height: 1;
+    margin: 0;
+    letter-spacing: -1px;
+    white-space: nowrap;
+    transition: all 0.5s ease;
 }
-.item-content p {
-    font-family: sans-serif;
-    font-size: 1.1rem;
-    color: #555;
-    font-weight: 500;
+
+/* 설명 래퍼 (애니메이션용) */
+.desc-wrapper {
+    display: flex;
+    align-items: center;
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.5s ease;
+    border-left: 0px solid var(--accent-color);
+}
+
+.item-desc {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.4;
+    text-align: left;
+    white-space: nowrap; 
+    padding-left: 0;
 }
 
 
-/* 4. 지원하기 */
+/* === [ACTIVE STATE] === */
+.timeline-item.active .curr-number {
+    background-color: var(--accent-color);
+    color: #fff;
+    border-color: var(--accent-color);
+    transform: scale(1.1); /* 강조 */
+}
+
+.timeline-item.active h3 {
+    color: var(--accent-color);
+    transform: scale(1.05); /* 제목 살짝 커짐 */
+}
+
+.timeline-item.active .desc-wrapper {
+    max-width: 500px;
+    opacity: 1;
+    border-left: 2px solid var(--accent-color); /* 빨간 선 긋기 */
+    padding-left: 20px;
+}
+
+.timeline-item.active .item-desc {
+    white-space: normal;
+}
+
+
+/* 4. 지원하기 (JOIN THE CREW) */
 .apply-section { background-color: #1a1a1a; color: #fff; align-items: center; z-index: 10; }
 .apply-container { text-align: center; opacity: 0; transform: scale(0.9); }
 .recruit-info { font-family: sans-serif; font-size: 1.2rem; margin-bottom: 30px; opacity: 0.8; letter-spacing: 2px;}
@@ -172,6 +258,7 @@ body {
 .apply-btn:hover { background-color: #fff; color: #000; transform: translateY(-5px); box-shadow: 0 10px 30px rgba(255,255,255,0.2); }
 .arrow-icon { font-size: 2rem; vertical-align: middle; margin-left: 10px; }
 
+
 /* Footer */
 .footer { background: #000; color: #888; padding: 60px 20px; font-family: sans-serif; font-size: 0.9rem; z-index: 10; }
 .footer-row { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
@@ -180,13 +267,14 @@ body {
 .contact { margin-bottom: 5px; color: #fff; }
 
 @media (max-width: 768px) {
-    .iphone-mockup { width: 220px; height: 450px; }
-    .phones-track { gap: 30px; }
-    .apply-btn { font-size: 2.5rem; padding: 20px 40px; }
-    .footer-row { flex-direction: column; gap: 30px; text-align: center; }
-    .right { text-align: center; }
-    
-    /* 커리큘럼 모바일 대응 */
-    .section-title { font-size: 3.5rem; }
-    .item-content h3 { font-size: 2rem; }
+    .item-body { flex-direction: column; gap: 10px; }
+    .timeline-item.active .desc-wrapper { 
+        max-width: 100%; 
+        border-left: none; 
+        border-top: 2px solid var(--accent-color);
+        padding-left: 0;
+        padding-top: 10px;
+        justify-content: center;
+    }
+    .item-desc { text-align: center; }
 }
