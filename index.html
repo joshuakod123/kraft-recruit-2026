@@ -1,247 +1,312 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KRAFT 2026 Recruiting</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-</head>
-<body>
+:root {
+    --bg-color: #EAE8E0;
+    --text-color: #1a1a1a;
+    --accent-color: #990000; /* 고려대 크림슨 */
+    --dim-opacity: 0.2; /* 비활성 아이템 투명도 */
+}
 
-    <div class="bg-noise"></div>
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-    <main class="main-container">
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Helvetica Neue', 'Arial', sans-serif;
+    overflow-x: hidden;
+}
 
-        <section class="section hero-section" id="hero">
-            <div class="title-stack">
-                <h1 class="kraft-text">KRAFT</h1>
-                <h1 class="kraft-text">KRAFT</h1>
-                <h1 class="kraft-text">KRAFT</h1>
-            </div>
-            <div class="scroll-down">
-                <span>SCROLL DOWN</span>
-                <div class="arrow">↓</div>
-            </div>
-        </section>
+h1, .apply-btn { font-family: 'Impact', 'Charcoal', sans-serif; }
 
-        <section class="section app-section">
-            <div class="app-text-wrapper">
-                <h2>OUR APP</h2>
-                <p>Music, Tech, Business Combined.</p>
-            </div>
-            
-            <div class="phones-track">
-                <div class="iphone-item">
-                    <div class="iphone-mockup">
-                        <div class="notch"></div>
-                        <div class="screen">
-                            <img src="images/screen1.png" alt="Login Screen" class="app-img">
-                        </div>
-                    </div>
-                    <p class="caption">Login Screen</p>
-                </div>
-                <div class="iphone-item">
-                    <div class="iphone-mockup">
-                        <div class="notch"></div>
-                        <div class="screen">
-                            <img src="images/screen2.png" alt="Main Screen" class="app-img">
-                        </div>
-                    </div>
-                    <p class="caption">Main Screen</p>
-                </div>
-                <div class="iphone-item">
-                    <div class="iphone-mockup">
-                        <div class="notch"></div>
-                        <div class="screen">
-                            <img src="images/screen3.png" alt="Calendar" class="app-img">
-                        </div>
-                    </div>
-                    <p class="caption">Calendar & Curriculum</p>
-                </div>
-                <div class="iphone-item">
-                    <div class="iphone-mockup">
-                        <div class="notch"></div>
-                        <div class="screen">
-                            <img src="images/screen4.png" alt="Streaming" class="app-img">
-                        </div>
-                    </div>
-                    <p class="caption">Streaming</p>
-                </div>
-            </div>
-        </section>
+.bg-noise {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    opacity: 0.05; pointer-events: none; z-index: 999;
+    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+    filter: contrast(170%) brightness(100%);
+}
 
-        <section class="section curriculum-section">
-            <div class="curr-container">
-                
-                <div class="section-header">
-                    <h2 class="section-title">CURRICULUM</h2>
-                    <p class="section-subtitle">CLICK TO EXPLORE</p>
-                </div>
-                
-                <div class="timeline-list">
-                    
-                    <div class="timeline-item">
-                        <div class="item-header">
-                            <span class="curr-number">WK 01</span>
-                            <div class="line-connector"></div>
-                        </div>
-                        <div class="item-body">
-                            <h3>ENTERTAINMENT SYSTEM</h3>
-                            <div class="desc-wrapper">
-                                <p class="item-desc">Comprehensive analysis of the entertainment ecosystem and key players beyond just music.</p>
-                            </div>
-                        </div>
-                    </div>
+.section {
+    min-height: 100vh; width: 100%;
+    position: relative;
+    padding: 100px 0;
+    display: flex; flex-direction: column; justify-content: center;
+}
 
-                    <div class="timeline-item">
-                        <div class="item-header">
-                            <span class="curr-number">WK 02</span>
-                            <div class="line-connector"></div>
-                        </div>
-                        <div class="item-body">
-                            <h3>HISTORY & TRENDS</h3>
-                            <div class="desc-wrapper">
-                                <p class="item-desc">Genealogy and trend analysis from Rock, Hip-hop, R&B to K-Pop hybrid genres.</p>
-                            </div>
-                        </div>
-                    </div>
+/* 1. 히어로 */
+.hero-section { align-items: center; z-index: 10; background: var(--bg-color); }
+.title-stack { text-align: center; margin-bottom: 50px; }
+.kraft-text {
+    font-size: clamp(4rem, 20vw, 15rem); line-height: 0.8;
+    text-transform: uppercase; letter-spacing: -0.04em;
+    color: #444; opacity: 0;
+}
+.kraft-text:nth-child(2) { color: #000; }
+.scroll-down {
+    position: absolute; bottom: 40px; text-align: center;
+    font-family: sans-serif; font-size: 0.8rem; opacity: 0.6;
+}
+.arrow { font-size: 1.5rem; animation: bounce 2s infinite; }
+@keyframes bounce { 0%, 100% {transform: translateY(0);} 50% {transform: translateY(-10px);} }
 
-                    <div class="timeline-item">
-                        <div class="item-header">
-                            <span class="curr-number">WK 03</span>
-                            <div class="line-connector"></div>
-                        </div>
-                        <div class="item-body">
-                            <h3>BILLBOARD vs MELON</h3>
-                            <div class="desc-wrapper">
-                                <p class="item-desc">Platform algorithms and chart entry strategies for both global and local markets.</p>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="timeline-item">
-                        <div class="item-header">
-                            <span class="curr-number">WK 04</span>
-                            <div class="line-connector"></div>
-                        </div>
-                        <div class="item-body">
-                            <h3>DAW PRACTICE</h3>
-                            <div class="desc-wrapper">
-                                <p class="item-desc">MIDI basics (Cubase) and technical communication skills for working with songwriters.</p>
-                            </div>
-                        </div>
-                    </div>
+/* 2. 앱 섹션 */
+.app-section {
+    background-color: #e6e4dc;
+    overflow: hidden;
+    justify-content: center;
+    padding: 0;
+}
+.app-text-wrapper {
+    text-align: center; margin-bottom: 40px; z-index: 5;
+    padding: 0 20px;
+}
+.app-text-wrapper h2 { font-family: 'Impact'; font-size: 4rem; margin-bottom: 10px; }
+.app-text-wrapper p { font-family: sans-serif; font-size: 1.2rem; opacity: 0.7; }
 
-                    <div class="timeline-item">
-                        <div class="item-header">
-                            <span class="curr-number">WK 05</span>
-                            <div class="line-connector"></div>
-                        </div>
-                        <div class="item-body">
-                            <h3>ESSENCE OF A&R</h3>
-                            <div class="desc-wrapper">
-                                <p class="item-desc">Logic of music selection (Song Camp) and vocal directing fitting the artist's identity.</p>
-                            </div>
-                        </div>
-                    </div>
+.phones-track {
+    display: flex; gap: 50px; width: max-content; padding-left: 0; 
+}
+.iphone-item {
+    display: flex; flex-direction: column; align-items: center; flex-shrink: 0;
+}
+.iphone-mockup {
+    width: 300px; height: 600px;
+    background: #000; border-radius: 45px;
+    border: 8px solid #1a1a1a;
+    position: relative; overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+}
+.notch {
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 100px; height: 25px; background: #000;
+    border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; z-index: 10;
+}
+.screen { width: 100%; height: 100%; background: #222; }
+.app-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.caption { margin-top: 20px; font-family: sans-serif; font-weight: bold; font-size: 1.2rem; opacity: 0.8; }
 
-                    <div class="timeline-item">
-                        <div class="item-header">
-                            <span class="curr-number">WK 06</span>
-                            <div class="line-connector"></div>
-                        </div>
-                        <div class="item-body">
-                            <h3>VISUAL DIRECTING</h3>
-                            <div class="desc-wrapper">
-                                <p class="item-desc">Establishing visual consistency strategies including mise-en-scène and fashion direction.</p>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="timeline-item">
-                        <div class="item-header">
-                            <span class="curr-number">WK 07</span>
-                            <div class="line-connector"></div>
-                        </div>
-                        <div class="item-body">
-                            <h3>BUSINESS ANALYSIS</h3>
-                            <div class="desc-wrapper">
-                                <p class="item-desc">Analysis of public disclosures (HYBE, CJ ENM) and designing new business models.</p>
-                            </div>
-                        </div>
-                    </div>
+/* 3. 커리큘럼 섹션 (스포트라이트) */
+.curriculum-section {
+    background-color: #EAE8E0;
+    padding: 150px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
 
-                    <div class="timeline-item">
-                        <div class="item-header">
-                            <span class="curr-number">WK 08</span>
-                            <div class="line-connector"></div>
-                        </div>
-                        <div class="item-body">
-                            <h3>LAW & COPYRIGHT</h3>
-                            <div class="desc-wrapper">
-                                <p class="item-desc">Study of standard contracts, settlement systems, and major copyright dispute cases.</p>
-                            </div>
-                        </div>
-                    </div>
+.curr-container {
+    width: 100%;
+    max-width: 1000px;
+    text-align: center;
+}
 
-                    <div class="timeline-item">
-                        <div class="item-header">
-                            <span class="curr-number">WK 09</span>
-                            <div class="line-connector"></div>
-                        </div>
-                        <div class="item-body">
-                            <h3>LOGIC & VISUALIZING</h3>
-                            <div class="desc-wrapper">
-                                <p class="item-desc">Data visualization and logical reporting techniques to enhance proposal persuasion.</p>
-                            </div>
-                        </div>
-                    </div>
+.section-header { margin-bottom: 80px; }
+.section-title {
+    font-family: 'Impact', sans-serif;
+    font-size: clamp(4rem, 10vw, 7rem);
+    line-height: 0.9;
+    letter-spacing: -2px;
+    margin-bottom: 10px;
+}
+.section-subtitle {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: var(--accent-color);
+    animation: blink 2s infinite;
+}
+@keyframes blink { 0%, 100% {opacity: 1;} 50% {opacity: 0.3;} }
 
-                    <div class="timeline-item">
-                        <div class="item-header">
-                            <span class="curr-number">WK 10</span>
-                            <div class="line-connector end"></div>
-                        </div>
-                        <div class="item-body">
-                            <h3>PORTFOLIO DAY</h3>
-                            <div class="desc-wrapper">
-                                <p class="item-desc">Final presentation archiving one semester's achievements into an application format.</p>
-                            </div>
-                        </div>
-                    </div>
 
-                </div>
+/* 리스트 스타일 */
+.timeline-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease;
+}
 
-            </div>
-        </section>
+/* 개별 아이템 */
+.timeline-item {
+    margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0; 
+    transform: translateY(30px);
+    width: 100%;
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    cursor: pointer;
+    /* 모바일 좌우 여백 확보 */
+    padding: 0 10px;
+}
 
-        <section class="section apply-section">
-            <div class="apply-container">
-                <p class="recruit-info">2026-1 Semester Recruiting</p>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfibstvw67SiF2vQB-INGDQfzldqDt3ZtHlx8LBa_tS-rTCRA/viewform?usp=preview" target="_blank" class="apply-btn">
-                    JOIN THE CREW
-                    <span class="arrow-icon">↗</span>
-                </a>
-            </div>
-        </section>
+/* 스포트라이트 효과 (형제 흐리기) */
+.timeline-list.has-active .timeline-item:not(.active) {
+    opacity: var(--dim-opacity) !important;
+    filter: blur(3px);
+    transform: scale(0.95);
+}
 
-        <footer class="footer">
-            <div class="footer-row">
-                <div class="col">
-                    <h3>KRAFT</h3>
-                    <p>@kraftent.official</p>
-                </div>
-                <div class="col right">
-                    <p class="contact">kraftent2025@gmail.com</p>
-                    <p class="copyright">© 2026 KRAFT Entertainment.</p>
-                </div>
-            </div>
-        </footer>
+.item-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
 
-    </main>
+.curr-number {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: rgba(43, 43, 43, 0.5);
+    letter-spacing: 2px;
+    background: #EAE8E0;
+    padding: 5px 10px;
+    z-index: 2;
+    border: 1px solid rgba(43, 43, 43, 0.2);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
 
-    <script src="script.js"></script>
-</body>
-</html>
+.line-connector {
+    width: 1px;
+    height: 30px;
+    background-color: #ccc;
+    margin-top: 10px;
+    transition: height 0.3s ease;
+}
+.line-connector.end { display: none; }
+
+.item-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    gap: 30px;
+}
+
+.timeline-item h3 {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: 800;
+    font-size: 2.2rem;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    line-height: 1.1; /* 줄간격 조정 */
+    margin: 0;
+    letter-spacing: -1px;
+    white-space: nowrap; /* PC에서는 한 줄 */
+    transition: all 0.5s ease;
+}
+
+/* 설명 래퍼 */
+.desc-wrapper {
+    display: flex;
+    align-items: center;
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.5s ease;
+    border-left: 0px solid var(--accent-color);
+}
+
+.item-desc {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.4;
+    text-align: left;
+    white-space: nowrap; 
+    padding-left: 0;
+}
+
+/* ACTIVE 상태 */
+.timeline-item.active .curr-number {
+    background-color: var(--accent-color);
+    color: #fff;
+    border-color: var(--accent-color);
+    transform: scale(1.1);
+}
+
+.timeline-item.active h3 {
+    color: var(--accent-color);
+    transform: scale(1.05);
+}
+
+.timeline-item.active .desc-wrapper {
+    max-width: 500px;
+    opacity: 1;
+    border-left: 2px solid var(--accent-color);
+    padding-left: 20px;
+}
+
+.timeline-item.active .item-desc {
+    white-space: normal;
+}
+
+
+/* 4. 지원하기 */
+.apply-section { background-color: #1a1a1a; color: #fff; align-items: center; z-index: 10; }
+.apply-container { text-align: center; opacity: 0; transform: scale(0.9); }
+.recruit-info { font-family: sans-serif; font-size: 1.2rem; margin-bottom: 30px; opacity: 0.8; letter-spacing: 2px;}
+.apply-btn {
+    display: inline-block; font-size: 4rem; color: #fff; text-decoration: none;
+    border: 4px solid #fff; padding: 30px 80px; transition: all 0.3s ease; text-transform: uppercase;
+}
+.apply-btn:hover { background-color: #fff; color: #000; transform: translateY(-5px); box-shadow: 0 10px 30px rgba(255,255,255,0.2); }
+.arrow-icon { font-size: 2rem; vertical-align: middle; margin-left: 10px; }
+
+
+/* Footer */
+.footer { background: #000; color: #888; padding: 60px 20px; font-family: sans-serif; font-size: 0.9rem; z-index: 10; }
+.footer-row { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+.footer h3 { color: #fff; font-size: 1.5rem; margin-bottom: 5px; font-family: 'Impact'; letter-spacing: 1px;}
+.right { text-align: right; }
+.contact { margin-bottom: 5px; color: #fff; }
+
+
+/* === 모바일 대응 (글자 잘림 해결) === */
+@media (max-width: 768px) {
+    /* 폰 트랙 간격 축소 */
+    .iphone-mockup { width: 220px; height: 450px; }
+    .phones-track { gap: 30px; }
+
+    /* 커리큘럼 섹션 모바일 최적화 */
+    .item-body { 
+        flex-direction: column; 
+        gap: 10px; 
+    }
+    
+    .timeline-item h3 {
+        white-space: normal; /* [중요] 줄바꿈 허용 */
+        word-break: keep-all; /* 단어 단위로 줄바꿈 */
+        font-size: 1.8rem; /* 모바일에서 폰트 크기 줄임 */
+        line-height: 1.2;
+    }
+
+    .timeline-item.active .desc-wrapper { 
+        max-width: 100%; 
+        border-left: none; 
+        border-top: 2px solid var(--accent-color); /* 선을 위쪽으로 이동 */
+        padding-left: 0;
+        padding-top: 15px;
+        justify-content: center;
+    }
+    
+    .item-desc { 
+        white-space: normal; /* 설명글 줄바꿈 허용 */
+        text-align: center; 
+        font-size: 0.95rem;
+    }
+
+    /* 지원 버튼 모바일 최적화 */
+    .apply-btn { 
+        font-size: 2rem; /* 버튼 글씨 크기 줄임 */
+        padding: 20px 30px; 
+        white-space: nowrap; /* 버튼은 한 줄 유지 */
+    }
+    
+    .footer-row { flex-direction: column; gap: 30px; text-align: center; }
+    .right { text-align: center; }
+}
