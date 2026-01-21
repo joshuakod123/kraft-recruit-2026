@@ -26,7 +26,7 @@ gsap.to(".hero-section", {
 });
 
 
-// 3. 앱 섹션 (가로 이동)
+// 3. 앱 섹션
 const track = document.querySelector(".phones-track");
 const trackWidth = track.scrollWidth;
 gsap.set(track, { x: window.innerWidth }); 
@@ -45,44 +45,58 @@ gsap.to(track, {
 });
 
 
-// 4. [NEW] 커리큘럼 타임라인 애니메이션
-// (1) 수직선이 쭉- 그려짐
-gsap.to(".vertical-line", {
-    height: "100%", // 높이 0 -> 100%
-    ease: "none",
-    scrollTrigger: {
-        trigger: ".timeline-wrapper",
-        start: "top center", // 화면 중간쯤 왔을 때 시작
-        end: "bottom center", // 끝까지 그리기
-        scrub: 1 // 스크롤 속도에 맞춰서 그려짐 (천천히)
-    }
-});
+// 4. [NEW] 커리큘럼 인터랙션 & 자동 리셋
+const timelineList = document.querySelector(".timeline-list");
+const timelineItems = document.querySelectorAll(".timeline-item");
 
-// (2) 각 아이템(점+글자)이 선에 맞춰 등장
-const items = gsap.utils.toArray(".timeline-item");
-
-items.forEach((item) => {
-    // 불렛 포인트 뽕!
-    gsap.to(item.querySelector(".bullet-point"), {
-        scale: 1,
-        duration: 0.5,
-        ease: "back.out(1.7)", // 띠용 효과
-        scrollTrigger: {
-            trigger: item,
-            start: "top 60%", // 아이템 위치쯤 오면 실행
-            toggleActions: "play none none reverse"
-        }
-    });
-
-    // 글자 스르륵
+// (1) 스크롤 등장 효과
+gsap.utils.toArray(timelineItems).forEach((item, i) => {
     gsap.to(item, {
         opacity: 1,
-        x: 0, // 원래 위치로
+        y: 0,
         duration: 0.8,
+        ease: "power3.out",
         scrollTrigger: {
             trigger: item,
-            start: "top 60%",
+            start: "top 85%",
             toggleActions: "play none none reverse"
+        },
+        delay: i * 0.05
+    });
+
+    // (2) [NEW] 화면 밖으로 나가면 자동 닫기 (Auto Reset)
+    ScrollTrigger.create({
+        trigger: item,
+        start: "top bottom", // 화면 아래로 사라질 때
+        end: "bottom top",   // 화면 위로 사라질 때
+        onLeave: () => closeItem(item),
+        onLeaveBack: () => closeItem(item)
+    });
+});
+
+// 아이템 닫는 함수
+function closeItem(item) {
+    item.classList.remove("active");
+    // 모든 아이템이 닫히면 부모의 has-active 클래스 제거 (블러 해제)
+    if (!document.querySelector(".timeline-item.active")) {
+        timelineList.classList.remove("has-active");
+    }
+}
+
+// (3) 클릭 이벤트 (스포트라이트 모드)
+timelineItems.forEach((item) => {
+    item.addEventListener("click", () => {
+        const isActive = item.classList.contains("active");
+
+        // 1. 다른 모든 아이템 닫기
+        timelineItems.forEach(el => el.classList.remove("active"));
+
+        // 2. 클릭한 아이템 토글
+        if (!isActive) {
+            item.classList.add("active");
+            timelineList.classList.add("has-active"); // 블러 효과 켜기
+        } else {
+            timelineList.classList.remove("has-active"); // 블러 효과 끄기
         }
     });
 });
