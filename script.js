@@ -45,7 +45,7 @@ gsap.to(track, {
 });
 
 
-// 4. [NEW] 커리큘럼 인터랙션 & 자동 리셋
+// 4. 커리큘럼 인터랙션 & 자동 리셋
 const timelineList = document.querySelector(".timeline-list");
 const timelineItems = document.querySelectorAll(".timeline-item");
 
@@ -64,7 +64,7 @@ gsap.utils.toArray(timelineItems).forEach((item, i) => {
         delay: i * 0.05
     });
 
-    // (2) [NEW] 화면 밖으로 나가면 자동 닫기 (Auto Reset)
+    // (2) 화면 밖으로 나가면 자동 닫기 (Auto Reset)
     ScrollTrigger.create({
         trigger: item,
         start: "top bottom", // 화면 아래로 사라질 때
@@ -77,7 +77,6 @@ gsap.utils.toArray(timelineItems).forEach((item, i) => {
 // 아이템 닫는 함수
 function closeItem(item) {
     item.classList.remove("active");
-    // 모든 아이템이 닫히면 부모의 has-active 클래스 제거 (블러 해제)
     if (!document.querySelector(".timeline-item.active")) {
         timelineList.classList.remove("has-active");
     }
@@ -94,15 +93,15 @@ timelineItems.forEach((item) => {
         // 2. 클릭한 아이템 토글
         if (!isActive) {
             item.classList.add("active");
-            timelineList.classList.add("has-active"); // 블러 효과 켜기
+            timelineList.classList.add("has-active");
         } else {
-            timelineList.classList.remove("has-active"); // 블러 효과 끄기
+            timelineList.classList.remove("has-active");
         }
     });
 });
 
 
-// 5. 지원하기 버튼
+// 5. 지원하기 버튼 등장
 gsap.to(".apply-container", {
     scrollTrigger: {
         trigger: ".apply-section",
