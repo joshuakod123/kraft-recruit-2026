@@ -84,7 +84,7 @@ h1, .ticket-title { font-family: 'Impact', 'Charcoal', sans-serif; }
 .caption { margin-top: 20px; font-family: sans-serif; font-weight: bold; font-size: 1.2rem; opacity: 0.8; }
 
 
-/* 3. 커리큘럼 섹션 (모바일 간격 최적화 적용) */
+/* 3. 커리큘럼 섹션 */
 .curriculum-section {
     background-color: #EAE8E0;
     padding: 100px 20px;
@@ -127,26 +127,26 @@ h1, .ticket-title { font-family: 'Impact', 'Charcoal', sans-serif; }
     transition: all 0.3s ease;
 }
 
-/* [핵심 수정] 기본 간격은 좁게(15px), 클릭 시 넓게 설정 */
+/* 기본 상태 (데스크탑 기준) */
 .timeline-item {
-    margin-bottom: 15px; /* 기본 간격을 아주 좁게 설정 */
+    margin-bottom: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
     opacity: 0; 
     transform: translateY(30px);
     width: 100%;
-    transition: margin-bottom 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease; /* 마진 변경 시 부드럽게 */
+    transition: margin-bottom 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease;
     cursor: pointer;
     padding: 0 10px;
 }
 
-/* 클릭되어 활성화된 아이템만 여백을 넉넉하게 줌 */
+/* 클릭 시 활성화 상태 */
 .timeline-item.active {
-    margin-bottom: 60px; 
+    margin-bottom: 60px; /* 상세 내용이 나올 공간 확보 */
 }
 
-/* 활성화되지 않은 아이템 흐리게 */
+/* 비활성화 아이템 흐림 처리 */
 .timeline-list.has-active .timeline-item:not(.active) {
     opacity: 0.3 !important;
     filter: blur(1px);
@@ -176,7 +176,7 @@ h1, .ticket-title { font-family: 'Impact', 'Charcoal', sans-serif; }
 
 .line-connector {
     width: 1px;
-    height: 20px; /* 연결선 길이도 약간 줄임 */
+    height: 20px;
     background-color: #ccc;
     margin-top: 10px;
     transition: height 0.3s ease;
@@ -433,30 +433,47 @@ h1, .ticket-title { font-family: 'Impact', 'Charcoal', sans-serif; }
 .contact { margin-bottom: 5px; color: #fff; }
 
 
-/* === 모바일 대응 === */
+/* === 모바일 대응 (간격 최소화 적용) === */
 @media (max-width: 768px) {
     .iphone-mockup { width: 220px; height: 450px; }
     .phones-track { gap: 30px; }
 
-    /* 커리큘럼 모바일: 아코디언 효과 극대화 */
+    /* [핵심] 모바일 타임라인 간격 압축 */
     .timeline-item {
-        margin-bottom: 10px; /* 평소엔 아주 좁게 */
+        margin-bottom: 5px; /* 기본 간격을 거의 없앰 (5px) */
+        padding-bottom: 0;
     }
     
     .timeline-item.active {
-        margin-bottom: 50px; /* 클릭 시에만 넓게 */
+        margin-bottom: 50px; /* 클릭했을 때만 벌어짐 */
     }
 
-    .item-body { flex-direction: column; gap: 10px; }
+    .item-header {
+        margin-bottom: 5px; /* 헤더와 본문 사이 간격 최소화 */
+    }
+
+    .line-connector {
+        height: 15px; /* 연결선 길이 줄임 */
+        margin-top: 5px;
+    }
+
+    .item-body { 
+        flex-direction: column; 
+        gap: 5px; /* 텍스트 그룹 간격 최소화 */
+    }
+
     .timeline-item h3 {
         white-space: normal;
         word-break: keep-all;
-        font-size: 1.8rem;
-        line-height: 1.2;
+        font-size: 1.6rem; /* 폰트 사이즈 살짝 조정 */
+        line-height: 1.1;
+        margin-bottom: 0;
     }
+
     .timeline-item.active .desc-wrapper { 
         max-width: 100%; border-left: none; border-top: 2px solid var(--accent-color);
         padding-left: 0; padding-top: 15px; justify-content: center;
+        margin-top: 10px;
     }
     .item-desc { white-space: normal; text-align: center; font-size: 0.95rem; }
 
@@ -483,7 +500,6 @@ h1, .ticket-title { font-family: 'Impact', 'Charcoal', sans-serif; }
     }
     .date-group { text-align: center; }
 
-    /* 모바일 노치 숨김 (깔끔하게) */
     .notch-top, .notch-bottom { display: none; }
 
     .footer-row { flex-direction: column; gap: 30px; text-align: center; }
