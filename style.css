@@ -127,7 +127,7 @@ h1, .ticket-title { font-family: 'Impact', 'Charcoal', sans-serif; }
     transition: all 0.3s ease;
 }
 
-/* 기본 상태 (데스크탑 기준) */
+/* 기본 상태 (데스크탑) */
 .timeline-item {
     margin-bottom: 15px;
     display: flex;
@@ -141,12 +141,12 @@ h1, .ticket-title { font-family: 'Impact', 'Charcoal', sans-serif; }
     padding: 0 10px;
 }
 
-/* 클릭 시 활성화 상태 */
+/* 데스크탑 활성화 시 간격 */
 .timeline-item.active {
-    margin-bottom: 60px; /* 상세 내용이 나올 공간 확보 */
+    margin-bottom: 60px;
 }
 
-/* 비활성화 아이템 흐림 처리 */
+/* 비활성 아이템 흐림 처리 */
 .timeline-list.has-active .timeline-item:not(.active) {
     opacity: 0.3 !important;
     filter: blur(1px);
@@ -204,6 +204,7 @@ h1, .ticket-title { font-family: 'Impact', 'Charcoal', sans-serif; }
     transition: all 0.5s ease;
 }
 
+/* 설명글 래퍼 (데스크탑: 가로로 펼쳐짐) */
 .desc-wrapper {
     display: flex;
     align-items: center;
@@ -224,7 +225,7 @@ h1, .ticket-title { font-family: 'Impact', 'Charcoal', sans-serif; }
     padding-left: 0;
 }
 
-/* Active State 스타일 */
+/* 데스크탑 Active 상태 */
 .timeline-item.active .curr-number {
     background-color: var(--accent-color);
     color: #fff;
@@ -249,7 +250,7 @@ h1, .ticket-title { font-family: 'Impact', 'Charcoal', sans-serif; }
 }
 
 
-/* 4. 티켓 스타일 지원하기 섹션 */
+/* 4. 티켓 스타일 */
 .apply-section { background-color: #1a1a1a; color: #fff; align-items: center; z-index: 10; }
 .apply-container { 
     text-align: center; 
@@ -433,49 +434,73 @@ h1, .ticket-title { font-family: 'Impact', 'Charcoal', sans-serif; }
 .contact { margin-bottom: 5px; color: #fff; }
 
 
-/* === 모바일 대응 (간격 최소화 적용) === */
+/* === 모바일 대응 (완벽 수정) === */
 @media (max-width: 768px) {
     .iphone-mockup { width: 220px; height: 450px; }
     .phones-track { gap: 30px; }
 
-    /* [핵심] 모바일 타임라인 간격 압축 */
+    /* 모바일 타임라인 압축 */
     .timeline-item {
-        margin-bottom: 5px; /* 기본 간격을 거의 없앰 (5px) */
+        margin-bottom: 0px; /* 기본 여백 완전 제거 */
         padding-bottom: 0;
     }
     
     .timeline-item.active {
-        margin-bottom: 50px; /* 클릭했을 때만 벌어짐 */
+        margin-bottom: 40px; /* 펼쳐졌을 때만 여백 */
     }
 
     .item-header {
-        margin-bottom: 5px; /* 헤더와 본문 사이 간격 최소화 */
+        margin-bottom: 2px; /* 헤더와 제목 사이 좁게 */
     }
 
     .line-connector {
-        height: 15px; /* 연결선 길이 줄임 */
+        height: 10px; /* 연결선 최소화 */
         margin-top: 5px;
     }
 
     .item-body { 
         flex-direction: column; 
-        gap: 5px; /* 텍스트 그룹 간격 최소화 */
+        gap: 0px; /* 제목과 내용 사이 갭 제거 */
     }
 
     .timeline-item h3 {
         white-space: normal;
         word-break: keep-all;
-        font-size: 1.6rem; /* 폰트 사이즈 살짝 조정 */
-        line-height: 1.1;
-        margin-bottom: 0;
+        font-size: 1.5rem;
+        line-height: 1.2;
+        margin-bottom: 5px;
     }
 
-    .timeline-item.active .desc-wrapper { 
-        max-width: 100%; border-left: none; border-top: 2px solid var(--accent-color);
-        padding-left: 0; padding-top: 15px; justify-content: center;
-        margin-top: 10px;
+    /* [핵심 수정] 모바일에서 닫혀있을 때 높이 0으로 강제 설정 */
+    /* 데스크탑의 max-width 애니메이션을 무시하고 max-height로 제어 */
+    .desc-wrapper {
+        display: block; /* 모바일은 block 처리 */
+        max-width: 100%; /* 너비는 꽉 차게 */
+        max-height: 0;   /* 높이를 0으로 해서 공백 제거 */
+        opacity: 0;
+        overflow: hidden;
+        border: none;
+        margin-top: 0;
+        transition: max-height 0.5s ease, opacity 0.5s ease, margin 0.5s ease;
     }
-    .item-desc { white-space: normal; text-align: center; font-size: 0.95rem; }
+
+    /* 열렸을 때 */
+    .timeline-item.active .desc-wrapper {
+        max-width: 100%;
+        max-height: 500px; /* 충분한 높이 확보 */
+        opacity: 1;
+        margin-top: 15px;
+        border-left: none;
+        border-top: 2px solid var(--accent-color);
+        padding-top: 15px;
+        padding-left: 0;
+    }
+
+    .item-desc { 
+        white-space: normal; 
+        text-align: center; 
+        font-size: 0.95rem; 
+    }
 
     /* 티켓 모바일 최적화 */
     .ticket {
@@ -484,24 +509,11 @@ h1, .ticket-title { font-family: 'Impact', 'Charcoal', sans-serif; }
         flex-direction: column;
         height: auto;
     }
-
-    .ticket-left {
-        border-right: none;
-        border-bottom: 2px dashed #333;
-        padding: 30px;
-    }
-    
+    .ticket-left { border-right: none; border-bottom: 2px dashed #333; padding: 30px; }
     .ticket-title { font-size: 3.5rem; }
-
-    .ticket-right {
-        padding: 30px;
-        align-items: center;
-        text-align: center;
-    }
+    .ticket-right { padding: 30px; align-items: center; text-align: center; }
     .date-group { text-align: center; }
-
     .notch-top, .notch-bottom { display: none; }
-
     .footer-row { flex-direction: column; gap: 30px; text-align: center; }
     .right { text-align: center; }
 }
