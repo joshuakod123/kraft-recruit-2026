@@ -84,10 +84,10 @@ h1, .ticket-title { font-family: 'Impact', 'Charcoal', sans-serif; }
 .caption { margin-top: 20px; font-family: sans-serif; font-weight: bold; font-size: 1.2rem; opacity: 0.8; }
 
 
-/* 3. 커리큘럼 섹션 */
+/* 3. 커리큘럼 섹션 (모바일 간격 최적화 적용) */
 .curriculum-section {
     background-color: #EAE8E0;
-    padding: 150px 20px;
+    padding: 100px 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -100,7 +100,7 @@ h1, .ticket-title { font-family: 'Impact', 'Charcoal', sans-serif; }
     text-align: center;
 }
 
-.section-header { margin-bottom: 80px; }
+.section-header { margin-bottom: 60px; }
 .section-title {
     font-family: 'Impact', sans-serif;
     font-size: clamp(4rem, 10vw, 7rem);
@@ -127,23 +127,30 @@ h1, .ticket-title { font-family: 'Impact', 'Charcoal', sans-serif; }
     transition: all 0.3s ease;
 }
 
+/* [핵심 수정] 기본 간격은 좁게(15px), 클릭 시 넓게 설정 */
 .timeline-item {
-    margin-bottom: 60px;
+    margin-bottom: 15px; /* 기본 간격을 아주 좁게 설정 */
     display: flex;
     flex-direction: column;
     align-items: center;
     opacity: 0; 
     transform: translateY(30px);
     width: 100%;
-    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: margin-bottom 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease; /* 마진 변경 시 부드럽게 */
     cursor: pointer;
     padding: 0 10px;
 }
 
+/* 클릭되어 활성화된 아이템만 여백을 넉넉하게 줌 */
+.timeline-item.active {
+    margin-bottom: 60px; 
+}
+
+/* 활성화되지 않은 아이템 흐리게 */
 .timeline-list.has-active .timeline-item:not(.active) {
-    opacity: var(--dim-opacity) !important;
-    filter: blur(3px);
-    transform: scale(0.95);
+    opacity: 0.3 !important;
+    filter: blur(1px);
+    transform: scale(0.98);
 }
 
 .item-header {
@@ -169,7 +176,7 @@ h1, .ticket-title { font-family: 'Impact', 'Charcoal', sans-serif; }
 
 .line-connector {
     width: 1px;
-    height: 30px;
+    height: 20px; /* 연결선 길이도 약간 줄임 */
     background-color: #ccc;
     margin-top: 10px;
     transition: height 0.3s ease;
@@ -217,6 +224,7 @@ h1, .ticket-title { font-family: 'Impact', 'Charcoal', sans-serif; }
     padding-left: 0;
 }
 
+/* Active State 스타일 */
 .timeline-item.active .curr-number {
     background-color: var(--accent-color);
     color: #fff;
@@ -254,7 +262,6 @@ h1, .ticket-title { font-family: 'Impact', 'Charcoal', sans-serif; }
 
 .recruit-info { font-family: sans-serif; font-size: 1.2rem; margin-bottom: 40px; opacity: 0.8; letter-spacing: 2px;}
 
-/* 티켓 링크 래퍼 */
 .ticket-link {
     text-decoration: none;
     display: inline-block;
@@ -263,10 +270,9 @@ h1, .ticket-title { font-family: 'Impact', 'Charcoal', sans-serif; }
 }
 
 .ticket-link:hover {
-    transform: rotate(-2deg) scale(1.02); /* 호버 시 틸트 효과 */
+    transform: rotate(-2deg) scale(1.02);
 }
 
-/* 티켓 본체 */
 .ticket {
     display: flex;
     background: #000;
@@ -281,17 +287,16 @@ h1, .ticket-title { font-family: 'Impact', 'Charcoal', sans-serif; }
 }
 
 .ticket-link:hover .ticket {
-    border-color: var(--accent-color); /* 호버 시 테두리 붉게 */
+    border-color: var(--accent-color);
 }
 
-/* 티켓 왼쪽 (메인) */
 .ticket-left {
     flex: 2;
     padding: 40px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-right: 2px dashed #333; /* 점선 */
+    border-right: 2px dashed #333;
     position: relative;
     background: linear-gradient(135deg, #111 0%, #000 100%);
 }
@@ -321,7 +326,6 @@ h1, .ticket-title { font-family: 'Impact', 'Charcoal', sans-serif; }
     align-items: flex-end;
 }
 
-/* CSS 바코드 */
 .barcode {
     width: 150px;
     height: 40px;
@@ -342,14 +346,13 @@ h1, .ticket-title { font-family: 'Impact', 'Charcoal', sans-serif; }
     );
 }
 
-/* [NEW] CLICK TO APPLY 스타일 */
 .click-to-apply {
     font-family: 'Helvetica Neue', sans-serif;
     font-weight: 700;
-    color: var(--accent-color); /* 붉은색 포인트 */
+    color: var(--accent-color);
     letter-spacing: 2px;
     font-size: 1rem;
-    animation: blink-red 1.5s infinite; /* 깜빡임 효과 */
+    animation: blink-red 1.5s infinite;
 }
 
 @keyframes blink-red {
@@ -358,7 +361,6 @@ h1, .ticket-title { font-family: 'Impact', 'Charcoal', sans-serif; }
 }
 
 
-/* 티켓 오른쪽 (스텁) */
 .ticket-right {
     flex: 1;
     padding: 40px;
@@ -409,7 +411,6 @@ h1, .ticket-title { font-family: 'Impact', 'Charcoal', sans-serif; }
 }
 
 
-/* 티켓 반원 홈 (Notches) */
 .notch-top, .notch-bottom {
     position: absolute;
     width: 30px; height: 30px;
@@ -437,7 +438,15 @@ h1, .ticket-title { font-family: 'Impact', 'Charcoal', sans-serif; }
     .iphone-mockup { width: 220px; height: 450px; }
     .phones-track { gap: 30px; }
 
-    /* 커리큘럼 모바일 */
+    /* 커리큘럼 모바일: 아코디언 효과 극대화 */
+    .timeline-item {
+        margin-bottom: 10px; /* 평소엔 아주 좁게 */
+    }
+    
+    .timeline-item.active {
+        margin-bottom: 50px; /* 클릭 시에만 넓게 */
+    }
+
     .item-body { flex-direction: column; gap: 10px; }
     .timeline-item h3 {
         white-space: normal;
