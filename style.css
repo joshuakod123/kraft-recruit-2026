@@ -12,8 +12,11 @@ body {
     color: var(--white);
     font-family: 'Helvetica Neue', Arial, sans-serif;
     overflow-x: hidden;
+    /* 모바일에서 텍스트 크기가 제멋대로 변하는 것 방지 */
+    -webkit-text-size-adjust: none;
 }
 
+/* 노이즈 텍스처 */
 .bg-noise {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     opacity: 0.04; pointer-events: none; z-index: 100;
@@ -25,65 +28,132 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 60px 20px;
+    padding: 40px 20px;
     text-align: center;
+    justify-content: center;
 }
 
-.closed-header { margin-bottom: 80px; }
-.logo { font-family: 'Impact', sans-serif; font-size: 2.5rem; letter-spacing: 2px; color: var(--crimson); }
-.status-badge { font-size: 0.8rem; letter-spacing: 4px; color: var(--gray); margin-top: 10px; }
+/* 헤더 */
+.closed-header { margin-bottom: 40px; }
+.logo { font-family: 'Impact', sans-serif; font-size: 2.2rem; letter-spacing: 2px; color: var(--crimson); }
+.status-badge { font-size: 0.7rem; letter-spacing: 4px; color: var(--gray); margin-top: 8px; }
 
+/* 메인 타이틀 - 모바일에서도 안 깨지게 clamp 값 조정 */
 .main-title {
     font-family: 'Impact', sans-serif;
-    font-size: clamp(4rem, 15vw, 10rem);
-    line-height: 0.85;
-    letter-spacing: -2px;
-    margin-bottom: 50px;
+    font-size: clamp(3rem, 12vw, 9rem);
+    line-height: 0.9;
+    letter-spacing: -1px;
+    margin-bottom: 40px;
     background: linear-gradient(to bottom, #fff 0%, #444 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-.ticket-wrapper { position: relative; perspective: 1000px; margin-bottom: 80px; width: 100%; max-width: 600px; }
+/* 티켓 스타일 */
+.ticket-wrapper {
+    position: relative;
+    perspective: 1000px;
+    margin-bottom: 50px;
+    width: 100%;
+    max-width: 550px;
+}
 
 .memorial-ticket {
-    width: 100%; background: #111; border: 1px solid #222;
-    display: flex; position: relative; border-radius: 4px;
-    overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    width: 100%;
+    background: #111;
+    border: 1px solid #222;
+    display: flex;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
 }
 
 .stamp {
-    position: absolute; top: 50%; left: 50%;
+    position: absolute;
+    top: 50%; left: 50%;
     transform: translate(-50%, -50%) rotate(-15deg) scale(2);
-    border: 6px solid var(--crimson); color: var(--crimson);
-    font-family: 'Impact', sans-serif; font-size: 4rem;
-    padding: 10px 40px; border-radius: 15px; opacity: 0;
-    z-index: 10; pointer-events: none; background: rgba(10, 10, 10, 0.8);
+    border: 5px solid var(--crimson);
+    color: var(--crimson);
+    font-family: 'Impact', sans-serif;
+    font-size: 3.5rem;
+    padding: 8px 30px;
+    border-radius: 12px;
+    opacity: 0;
+    z-index: 10;
+    pointer-events: none;
+    background: rgba(10, 10, 10, 0.85);
+    white-space: nowrap;
 }
 
 .ticket-content { display: flex; width: 100%; }
-.t-left { flex: 2; padding: 40px; text-align: left; border-right: 1px dashed #333; }
-.t-brand { font-size: 0.7rem; color: var(--gray); letter-spacing: 2px; }
-.t-msg { font-family: 'Impact', sans-serif; font-size: 2.5rem; margin: 15px 0; line-height: 1; }
-.t-barcode { width: 120px; height: 30px; background: linear-gradient(90deg, #fff 2px, transparent 2px, #fff 5px, transparent 5px, #fff 10px, transparent 10px); background-size: 15px 100%; opacity: 0.3; }
 
-.t-right { flex: 1; padding: 40px; background: #0c0c0c; display: flex; flex-direction: column; justify-content: center; gap: 20px; }
-.t-info span { display: block; font-size: 0.6rem; color: var(--gray); margin-bottom: 5px; }
-.t-info strong { font-family: 'Impact', sans-serif; font-size: 1.2rem; color: var(--white); }
+.t-left {
+    flex: 1.8; padding: 30px; text-align: left;
+    border-right: 1px dashed #333;
+}
+.t-brand { font-size: 0.6rem; color: var(--gray); letter-spacing: 2px; }
+.t-msg { font-family: 'Impact', sans-serif; font-size: 2rem; margin: 12px 0; line-height: 1; }
+.t-barcode { 
+    width: 100px; height: 25px; 
+    background: linear-gradient(90deg, #fff 2px, transparent 2px, #fff 5px, transparent 5px, #fff 10px, transparent 10px); 
+    background-size: 15px 100%; opacity: 0.2; 
+}
 
-.final-msg { font-size: 1.1rem; line-height: 2; color: #888; margin-bottom: 40px; }
-.final-msg span { color: var(--white); font-weight: bold; display: block; margin-top: 10px; }
+.t-right {
+    flex: 1; padding: 30px; background: #0c0c0c;
+    display: flex; flex-direction: column; justify-content: center; gap: 15px;
+}
+.t-info span { display: block; font-size: 0.55rem; color: var(--gray); margin-bottom: 4px; }
+.t-info strong { font-family: 'Impact', sans-serif; font-size: 1.1rem; color: var(--white); }
 
-.sns-links { margin-bottom: 30px; }
-.sns-links a { color: var(--crimson); text-decoration: none; font-weight: bold; font-size: 0.9rem; letter-spacing: 1px; transition: color 0.3s; }
-.sns-links a:hover { color: #ff0000; }
-.dot { display: inline-block; width: 4px; height: 4px; background: #333; border-radius: 50%; margin: 0 15px; vertical-align: middle; }
+/* 하단 메시지 */
+.final-msg {
+    font-size: 0.95rem; line-height: 1.8; color: #888; margin-bottom: 30px;
+    word-break: keep-all; /* 모바일에서 단어 단위로 줄바꿈 */
+}
+.final-msg span { color: var(--white); font-weight: bold; display: block; margin-top: 10px; font-size: 1.05rem;}
 
-.copyright { font-size: 0.7rem; color: #333; letter-spacing: 1px; }
+.sns-links { margin-bottom: 25px; }
+.sns-links a { 
+    color: var(--crimson); text-decoration: none; font-weight: bold; font-size: 0.9rem; 
+    letter-spacing: 1px; transition: all 0.3s;
+}
+.sns-links a:hover { color: #ff0000; text-shadow: 0 0 10px rgba(255,0,0,0.3); }
+.dot { display: inline-block; width: 3px; height: 3px; background: #333; border-radius: 50%; margin: 0 12px; vertical-align: middle; }
 
+.copyright { font-size: 0.65rem; color: #333; letter-spacing: 1px; }
+
+/* === 모바일 대응 최적화 (핵심) === */
 @media (max-width: 600px) {
+    .closed-container { padding: 30px 15px; }
+    .closed-header { margin-bottom: 30px; }
+    
     .memorial-ticket { flex-direction: column; }
-    .t-left { border-right: none; border-bottom: 1px dashed #333; }
-    .t-right { flex-direction: row; gap: 30px; padding: 30px; }
-    .stamp { font-size: 3rem; }
+    .ticket-content { flex-direction: column; }
+    
+    .t-left { 
+        border-right: none; border-bottom: 1px dashed #333; 
+        padding: 25px; text-align: center; 
+    }
+    .t-msg { font-size: 1.8rem; }
+    .t-barcode { margin: 0 auto; }
+    
+    .t-right { 
+        flex-direction: row; gap: 20px; padding: 20px; 
+        justify-content: center; align-items: center;
+    }
+    .t-info { text-align: center; }
+
+    .stamp { font-size: 2.5rem; border-width: 4px; padding: 6px 20px; }
+    
+    .final-msg { font-size: 0.85rem; padding: 0 10px; }
+}
+
+/* 초소형 기기 대응 (iPhone SE 등) */
+@media (max-width: 380px) {
+    .main-title { font-size: 2.8rem; }
+    .t-right { gap: 10px; }
+    .t-info strong { font-size: 0.9rem; }
 }
