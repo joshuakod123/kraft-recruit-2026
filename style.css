@@ -1,159 +1,140 @@
 :root {
-    --crimson: #990000;
-    --black: #0a0a0a;
-    --white: #eae8e0;
-    --gray: #666;
+    --crimson: #c80000;
+    --black: #030305; /* 아주 깊은 우주의 보라빛이 감도는 블랙 */
+    --white: #f0f0f0;
+    --gray: #777;
+    --glass-bg: rgba(15, 15, 20, 0.65);
+    --glass-border: rgba(255, 255, 255, 0.08);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
 body {
     background-color: var(--black);
     color: var(--white);
     font-family: 'Helvetica Neue', Arial, sans-serif;
     overflow-x: hidden;
-    /* 모바일에서 텍스트 크기가 제멋대로 변하는 것 방지 */
-    -webkit-text-size-adjust: none;
+    overflow-y: hidden; /* 팝업 떠있을 땐 스크롤 방지 */
 }
 
-/* 노이즈 텍스처 */
+/* 필름 노이즈 효과 */
 .bg-noise {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    opacity: 0.04; pointer-events: none; z-index: 100;
+    opacity: 0.06; pointer-events: none; z-index: 9999;
     background-image: url("https://grainy-gradients.vercel.app/noise.svg");
 }
 
-.closed-container {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px 20px;
-    text-align: center;
-    justify-content: center;
+/* === 1. 메인 사이트 배경 (은은한 우주 테마) === */
+#main-site { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
+
+/* 성운 그라데이션 효과 (마우스 따라 이동함) */
+.nebula-bg {
+    position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle at 40% 40%, rgba(38, 20, 70, 0.15), transparent 40%),
+                radial-gradient(circle at 70% 60%, rgba(20, 40, 80, 0.1), transparent 50%);
+    filter: blur(60px); z-index: 0;
 }
 
-/* 헤더 */
-.closed-header { margin-bottom: 40px; }
-.logo { font-family: 'Impact', sans-serif; font-size: 2.2rem; letter-spacing: 2px; color: var(--crimson); }
-.status-badge { font-size: 0.7rem; letter-spacing: 4px; color: var(--gray); margin-top: 8px; }
-
-/* 메인 타이틀 - 모바일에서도 안 깨지게 clamp 값 조정 */
-.main-title {
-    font-family: 'Impact', sans-serif;
-    font-size: clamp(3rem, 12vw, 9rem);
-    line-height: 0.9;
-    letter-spacing: -1px;
-    margin-bottom: 40px;
-    background: linear-gradient(to bottom, #fff 0%, #444 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+/* 가장자리가 사라지는 홀로그램 그리드 */
+.grid-overlay {
+    position: absolute; top: -10%; left: -10%; width: 120%; height: 120%;
+    background-size: 50px 50px;
+    background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+    -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 70%);
+    mask-image: radial-gradient(circle at center, black 30%, transparent 70%);
+    z-index: 1;
 }
 
-/* 티켓 스타일 */
-.ticket-wrapper {
-    position: relative;
-    perspective: 1000px;
-    margin-bottom: 50px;
-    width: 100%;
-    max-width: 550px;
+/* 미세한 반짝임 (별먼지) */
+.stardust {
+    position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 1;
+    background-image: radial-gradient(rgba(255,255,255,0.8) 1px, transparent 1px);
+    background-size: 150px 150px; opacity: 0.15;
+    animation: twinkle 10s linear infinite alternate;
+}
+@keyframes twinkle { 
+    0% { opacity: 0.1; transform: scale(1); } 
+    100% { opacity: 0.3; transform: scale(1.02); } 
 }
 
-.memorial-ticket {
-    width: 100%;
-    background: #111;
-    border: 1px solid #222;
-    display: flex;
-    position: relative;
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+/* 네비게이션 & 타이포그래피 */
+.navbar {
+    position: fixed; top: 0; width: 100%; padding: 25px 50px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid var(--glass-border); z-index: 50;
+    background: linear-gradient(to bottom, rgba(3,3,5,0.8), transparent);
+}
+.nav-logo { font-family: 'Impact', sans-serif; font-size: 1.8rem; letter-spacing: 3px; }
+.nav-links { display: flex; gap: 40px; list-style: none; align-items: center; }
+.nav-links a { color: var(--gray); text-decoration: none; font-size: 0.85rem; font-weight: bold; letter-spacing: 1px; transition: color 0.3s; }
+.nav-links a:hover { color: var(--white); text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+.lounge-btn { background: var(--white); color: var(--black) !important; padding: 10px 24px; border-radius: 4px; font-weight: 800; box-shadow: 0 0 15px rgba(255,255,255,0.2); }
+
+.hero-section { height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 10; }
+
+.marquee-container {
+    width: 100%; overflow: hidden; position: absolute; top: 40%;
+    transform: translateY(-50%) rotate(-5deg) scale(1.1);
+    opacity: 0.08; white-space: nowrap; pointer-events: none;
+}
+.marquee-text { font-family: 'Impact', sans-serif; font-size: 10rem; line-height: 1; display: inline-block; animation: marquee 20s linear infinite; }
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+.hero-content { padding: 0 10vw; position: relative; z-index: 20; }
+.hero-title { font-family: 'Impact', sans-serif; font-size: 8rem; line-height: 0.9; letter-spacing: -2px; margin-bottom: 20px; text-shadow: 0 0 40px rgba(0,0,0,0.5); }
+.hero-sub { color: #999; font-size: 1.2rem; margin-bottom: 50px; }
+.explore-btn {
+    display: inline-block; padding: 16px 40px; border: 1px solid rgba(255,255,255,0.3);
+    color: var(--white); text-decoration: none; font-weight: bold; letter-spacing: 2px;
+    transition: all 0.3s; backdrop-filter: blur(5px);
+}
+.explore-btn:hover { background: var(--white); color: var(--black); box-shadow: 0 0 20px rgba(255,255,255,0.4); }
+
+/* === 2. 팝업 오버레이 (반투명 유리창) === */
+.popup-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(3, 3, 5, 0.5); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+    z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px;
+}
+.popup-content {
+    position: relative; width: 100%; max-width: 600px;
+    background: var(--glass-bg); border: 1px solid var(--glass-border);
+    border-radius: 24px; padding: 50px 30px; box-shadow: 0 30px 80px rgba(0,0,0,0.9);
 }
 
-.stamp {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%) rotate(-15deg) scale(2);
-    border: 5px solid var(--crimson);
-    color: var(--crimson);
-    font-family: 'Impact', sans-serif;
-    font-size: 3.5rem;
-    padding: 8px 30px;
-    border-radius: 12px;
-    opacity: 0;
-    z-index: 10;
-    pointer-events: none;
-    background: rgba(10, 10, 10, 0.85);
-    white-space: nowrap;
-}
+/* 닫기 버튼 */
+.close-btn { position: absolute; top: 25px; right: 25px; background: transparent; border: none; color: var(--gray); display: flex; align-items: center; gap: 8px; cursor: pointer; transition: color 0.3s; }
+.close-btn span { font-size: 0.7rem; font-weight: bold; letter-spacing: 2px; }
+.close-icon { width: 30px; height: 30px; border: 1px solid var(--gray); border-radius: 50%; position: relative; }
+.close-icon::before, .close-icon::after { content: ''; position: absolute; top: 50%; left: 50%; width: 12px; height: 1px; background: currentColor; }
+.close-icon::before { transform: translate(-50%, -50%) rotate(45deg); }
+.close-icon::after { transform: translate(-50%, -50%) rotate(-45deg); }
+.close-btn:hover, .close-btn:hover .close-icon { color: var(--white); border-color: var(--white); }
 
+/* 팝업 내부 콘텐츠 */
+.closed-container { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.logo { font-family: 'Impact', sans-serif; font-size: 2rem; letter-spacing: 2px; color: var(--crimson); text-shadow: 0 0 15px rgba(200,0,0,0.4); }
+.status-badge { font-size: 0.6rem; letter-spacing: 3px; color: var(--gray); margin-top: 5px; margin-bottom: 30px; }
+.main-title { font-family: 'Impact', sans-serif; font-size: 4rem; line-height: 0.9; margin-bottom: 30px; color: var(--white); }
+.ticket-wrapper { position: relative; margin-bottom: 30px; width: 100%; }
+.memorial-ticket { background: #08080a; border: 1px solid rgba(255,255,255,0.1); display: flex; border-radius: 8px; overflow: hidden; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.stamp { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-15deg) scale(2); border: 4px solid var(--crimson); color: var(--crimson); font-family: 'Impact', sans-serif; font-size: 3rem; padding: 4px 20px; border-radius: 8px; opacity: 0; z-index: 10; pointer-events: none; background: rgba(5,5,8,0.85); box-shadow: 0 0 20px rgba(200,0,0,0.2); }
 .ticket-content { display: flex; width: 100%; }
-
-.t-left {
-    flex: 1.8; padding: 30px; text-align: left;
-    border-right: 1px dashed #333;
-}
+.t-left { flex: 1.8; padding: 25px; text-align: left; border-right: 1px dashed rgba(255,255,255,0.1); }
 .t-brand { font-size: 0.6rem; color: var(--gray); letter-spacing: 2px; }
-.t-msg { font-family: 'Impact', sans-serif; font-size: 2rem; margin: 12px 0; line-height: 1; }
-.t-barcode { 
-    width: 100px; height: 25px; 
-    background: linear-gradient(90deg, #fff 2px, transparent 2px, #fff 5px, transparent 5px, #fff 10px, transparent 10px); 
-    background-size: 15px 100%; opacity: 0.2; 
-}
-
-.t-right {
-    flex: 1; padding: 30px; background: #0c0c0c;
-    display: flex; flex-direction: column; justify-content: center; gap: 15px;
-}
+.t-msg { font-family: 'Impact', sans-serif; font-size: 1.5rem; margin: 10px 0; line-height: 1; }
+.t-barcode { width: 80px; height: 20px; background: linear-gradient(90deg, rgba(255,255,255,0.8) 2px, transparent 2px, rgba(255,255,255,0.8) 5px, transparent 5px, rgba(255,255,255,0.8) 10px, transparent 10px); background-size: 12px 100%; opacity: 0.2; }
+.t-right { flex: 1; padding: 25px; background: #050508; display: flex; flex-direction: column; justify-content: center; gap: 15px; }
 .t-info span { display: block; font-size: 0.55rem; color: var(--gray); margin-bottom: 4px; }
-.t-info strong { font-family: 'Impact', sans-serif; font-size: 1.1rem; color: var(--white); }
+.t-info strong { font-family: 'Impact', sans-serif; font-size: 1rem; color: var(--white); }
+.final-msg { font-size: 0.9rem; line-height: 1.6; color: #888; }
+.final-msg span { color: var(--white); font-weight: bold; display: block; margin-top: 10px; }
 
-/* 하단 메시지 */
-.final-msg {
-    font-size: 0.95rem; line-height: 1.8; color: #888; margin-bottom: 30px;
-    word-break: keep-all; /* 모바일에서 단어 단위로 줄바꿈 */
-}
-.final-msg span { color: var(--white); font-weight: bold; display: block; margin-top: 10px; font-size: 1.05rem;}
-
-.sns-links { margin-bottom: 25px; }
-.sns-links a { 
-    color: var(--crimson); text-decoration: none; font-weight: bold; font-size: 0.9rem; 
-    letter-spacing: 1px; transition: all 0.3s;
-}
-.sns-links a:hover { color: #ff0000; text-shadow: 0 0 10px rgba(255,0,0,0.3); }
-.dot { display: inline-block; width: 3px; height: 3px; background: #333; border-radius: 50%; margin: 0 12px; vertical-align: middle; }
-
-.copyright { font-size: 0.65rem; color: #333; letter-spacing: 1px; }
-
-/* === 모바일 대응 최적화 (핵심) === */
-@media (max-width: 600px) {
-    .closed-container { padding: 30px 15px; }
-    .closed-header { margin-bottom: 30px; }
-    
+/* 모바일 화면 대응 */
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero-title { font-size: 4rem; }
     .memorial-ticket { flex-direction: column; }
-    .ticket-content { flex-direction: column; }
-    
-    .t-left { 
-        border-right: none; border-bottom: 1px dashed #333; 
-        padding: 25px; text-align: center; 
-    }
-    .t-msg { font-size: 1.8rem; }
-    .t-barcode { margin: 0 auto; }
-    
-    .t-right { 
-        flex-direction: row; gap: 20px; padding: 20px; 
-        justify-content: center; align-items: center;
-    }
-    .t-info { text-align: center; }
-
-    .stamp { font-size: 2.5rem; border-width: 4px; padding: 6px 20px; }
-    
-    .final-msg { font-size: 0.85rem; padding: 0 10px; }
-}
-
-/* 초소형 기기 대응 (iPhone SE 등) */
-@media (max-width: 380px) {
-    .main-title { font-size: 2.8rem; }
-    .t-right { gap: 10px; }
-    .t-info strong { font-size: 0.9rem; }
+    .t-left { border-right: none; border-bottom: 1px dashed rgba(255,255,255,0.1); }
+    .t-right { flex-direction: row; gap: 20px; align-items: center; justify-content: center; }
 }

@@ -3,65 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>KRAFT 2026-1 | RECRUITING CLOSED</title>
+    <title>KRAFT | THE NEW ERA</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body>
-
     <div class="bg-noise"></div>
 
-    <main class="closed-container">
+    <main id="main-site">
+        <div class="nebula-bg" id="nebula"></div>
+        <div class="stardust"></div>
+        <div class="grid-overlay" id="grid"></div>
         
-        <header class="closed-header">
-            <h1 class="logo">KRAFT</h1>
-            <div class="status-badge">2026-1 SPRING</div>
-        </header>
+        <nav class="navbar">
+            <div class="nav-logo">KRAFT</div>
+            <ul class="nav-links">
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#activities">ACTIVITIES</a></li>
+                <li><a href="#members">MEMBERS</a></li>
+                <li><a href="#join">JOIN</a></li>
+                <li><a href="#lounge" class="lounge-btn">MCCER LOUNGE</a></li>
+            </ul>
+        </nav>
 
-        <section class="visual-section">
-            <div class="main-title-wrap">
-                <h2 class="main-title">RECRUITING<br>CLOSED</h2>
+        <section class="hero-section">
+            <div class="marquee-container">
+                <div class="marquee-text">
+                    KRAFT ENTERTAINMENT / NEW ERA OF IT BUSINESS / KRAFT ENTERTAINMENT / NEW ERA OF IT BUSINESS /
+                </div>
             </div>
+            
+            <div class="hero-content">
+                <h1 class="hero-title">BEYOND<br>THE LIMITS</h1>
+                <p class="hero-sub">기획과 IT 비즈니스가 교차하는 KRAFT의 우주로.</p>
+                <a href="#about" class="explore-btn">EXPLORE KRAFT</a>
+            </div>
+        </section>
+    </main>
 
-            <div class="ticket-wrapper">
-                <div class="memorial-ticket">
-                    <div class="stamp">CLOSED</div>
-                    <div class="ticket-content">
-                        <div class="t-left">
-                            <span class="t-brand">KRAFT ENTERTAINMENT</span>
-                            <h3 class="t-msg">THANK YOU<br>FOR YOUR PASSION</h3>
-                            <div class="t-barcode"></div>
-                        </div>
-                        <div class="t-right">
-                            <div class="t-info">
-                                <span>STATUS</span>
-                                <strong>FINISHED</strong>
+    <div id="recruit-popup" class="popup-overlay">
+        <div class="popup-content">
+            <button id="close-popup" class="close-btn">
+                <span>CLOSE</span>
+                <div class="close-icon"></div>
+            </button>
+            
+            <div class="closed-container">
+                <header class="closed-header">
+                    <h2 class="logo">KRAFT</h2>
+                    <div class="status-badge">2026-1 SPRING</div>
+                </header>
+                
+                <div class="main-title-wrap">
+                    <h3 class="main-title">RECRUITING<br>CLOSED</h3>
+                </div>
+
+                <div class="ticket-wrapper">
+                    <div class="memorial-ticket">
+                        <div class="stamp">CLOSED</div>
+                        <div class="ticket-content">
+                            <div class="t-left">
+                                <span class="t-brand">KRAFT ENTERTAINMENT</span>
+                                <h4 class="t-msg">THANK YOU<br>FOR YOUR PASSION</h4>
+                                <div class="t-barcode"></div>
                             </div>
-                            <div class="t-info">
-                                <span>NEXT BATCH</span>
-                                <strong>SUMMER 2026</strong>
+                            <div class="t-right">
+                                <div class="t-info">
+                                    <span>STATUS</span>
+                                    <strong>FINISHED</strong>
+                                </div>
+                                <div class="t-info">
+                                    <span>NEXT BATCH</span>
+                                    <strong>SUMMER 2026</strong>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <footer class="closed-footer">
-            <p class="final-msg">
-                KRAFT 2026-1기 모집이 뜨거운 성원 속에 마감되었습니다.<br>
-                보내주신 소중한 지원서들을 하나하나 깊이 있게 검토하겠습니다.<br>
-                <span>우리는 곧 더 넓은 무대에서 만날 것입니다.</span>
-            </p>
-            <div class="sns-links">
-                <a href="https://www.instagram.com/kraftent.official/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
-                <span class="dot"></span>
-                <a href="mailto:kraftent2025@gmail.com">CONTACT</a>
+                <footer class="closed-footer">
+                    <p class="final-msg">
+                        KRAFT 2026-1기 모집이 뜨거운 성원 속에 마감되었습니다.<br>
+                        <span>우리는 곧 더 넓은 차원에서 만날 것입니다.</span>
+                    </p>
+                </footer>
             </div>
-            <p class="copyright">© 2026 KRAFT. ALL RIGHTS RESERVED.</p>
-        </footer>
-
-    </main>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
