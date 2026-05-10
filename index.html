@@ -2,13 +2,18 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>KRAFT | THE NEW ERA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRAFT | CRAFTING K-ENTERTAINMENT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 <body>
     <div class="bg-noise"></div>
+    <div class="cursor-glow" id="cursor-glow"></div>
 
     <main id="main-site">
         <div class="ambient-light" id="ambient-light"></div>
@@ -16,31 +21,296 @@
         <div class="grid-overlay" id="grid"></div>
         
         <nav class="navbar">
-            <div class="nav-logo">KRAFT</div>
+            <div class="nav-logo">
+                <span class="logo-k">K</span><span class="logo-rest">RAFT</span><span class="logo-dot">.</span>
+            </div>
             <ul class="nav-links">
                 <li><a href="#about">ABOUT</a></li>
-                <li><a href="#activities">ACTIVITIES</a></li>
+                <li><a href="#departments">DEPARTMENTS</a></li>
+                <li><a href="#program">PROGRAM</a></li>
                 <li><a href="#members" id="nav-members">MEMBERS</a></li>
-                <li><a href="#join">JOIN</a></li>
-                <li><a href="#lounge" class="lounge-btn">KRAFT LOUNGE</a></li>
+                <li><a href="#join" class="lounge-btn">JOIN US</a></li>
             </ul>
         </nav>
 
-        <section class="hero-section">
+        <!-- ============ HERO ============ -->
+        <section class="hero-section" id="hero">
+            <div class="stage-lights">
+                <div class="beam beam-1"></div>
+                <div class="beam beam-2"></div>
+                <div class="beam beam-3"></div>
+                <div class="beam beam-4"></div>
+            </div>
+
+            <div class="floating-tags">
+                <span class="ftag" style="top:18%;left:6%;">● LIVE</span>
+                <span class="ftag" style="top:28%;right:8%;">REC ●</span>
+                <span class="ftag" style="bottom:24%;left:4%;">CH.01</span>
+                <span class="ftag" style="bottom:18%;right:6%;">EST. 2026</span>
+            </div>
+
             <div class="marquee-container">
                 <div class="marquee-text">
-                    KRAFT ENTERTAINMENT / NEW ERA OF IT BUSINESS / KRAFT ENTERTAINMENT / NEW ERA OF IT BUSINESS /
+                    KRAFT, SHAPING THE FUTURE&nbsp;&nbsp;/&nbsp;&nbsp;KRAFT, SHAPING THE FUTURE&nbsp;&nbsp;/&nbsp;&nbsp;KRAFT, SHAPING THE FUTURE&nbsp;&nbsp;/&nbsp;&nbsp;
                 </div>
             </div>
             
             <div class="hero-content">
-                <h1 class="hero-title">BEYOND<br>THE LIMITS</h1>
-                <p class="hero-sub">기획과 IT 비즈니스가 교차하는 KRAFT의 universe로.</p>
-                <a href="#about" class="explore-btn">EXPLORE KRAFT</a>
+                <div class="hero-tag">
+                    <span class="tag-dot"></span>
+                    <span>KOREA UNIVERSITY · JOINT ENTERTAINMENT SOCIETY</span>
+                </div>
+                <h1 class="hero-title">
+                    <span class="line line-1">
+                        <span class="glitch" data-text="BEYOND">BEYOND</span>
+                    </span>
+                    <span class="line line-2">THE <span class="accent">STAGE</span></span>
+                </h1>
+                <p class="hero-sub">
+                    팬에서 <span class="hl">아키텍트</span>로.<br>
+                    K-엔터테인먼트의 다음 시대를 설계하는 사람들.
+                </p>
+                <div class="hero-cta">
+                    <a href="#about" class="explore-btn primary magnetic">
+                        <span class="btn-bg"></span>
+                        <span class="btn-text">EXPLORE KRAFT</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </a>
+                    <a href="#program" class="explore-btn secondary magnetic">
+                        <span class="btn-text">SEE PROGRAM</span>
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat"><strong>04</strong><span>DEPARTMENTS</span></div>
+                    <div class="stat"><strong>03</strong><span>PHASES</span></div>
+                    <div class="stat"><strong>2026</strong><span>1ST GEN</span></div>
+                </div>
+
+                <div class="audio-bars" aria-hidden="true">
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span>
+                </div>
+            </div>
+
+            <div class="scroll-indicator">
+                <span>SCROLL</span>
+                <div class="scroll-line"></div>
             </div>
         </section>
+
+        <!-- ============ ABOUT ============ -->
+        <section class="about-section" id="about">
+            <div class="section-header">
+                <span class="section-num">01 / ABOUT</span>
+                <h2 class="section-title">WHO <span class="outline">WE ARE</span></h2>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-text">
+                    <p class="lead">
+                        KRAFT는 고려대학교를 기반으로 한 <span class="hl">연합 엔터테인먼트 학회</span>입니다.
+                        K-pop 컴백과 바이럴 콘텐츠가 화려하게 펼쳐지는 무대 뒤편 — 그 커튼 너머의 세계를 직접 설계하고자 모였습니다.
+                    </p>
+                    <p>
+                        우리는 단순히 K-엔터테인먼트를 소비하지 않습니다. 데이터로 해체하고, 전략으로 재조립합니다. 
+                        HYBE, CJ ENM, SM Universe 등 현직 멘토와 함께 — KRAFT의 멤버들은 <span class="hl">관객에서 설계자로</span> 진화합니다.
+                    </p>
+                </div>
+                <div class="about-cards">
+                    <div class="ab-card">
+                        <span class="ab-icon">⌬</span>
+                        <h4>FROM FAN TO ARCHITECT</h4>
+                        <p>무대 뒤의 비즈니스 모델과 크리에이티브 메커니즘을 직접 해부합니다.</p>
+                    </div>
+                    <div class="ab-card">
+                        <span class="ab-icon">◈</span>
+                        <h4>INDUSTRY-GRADE NETWORK</h4>
+                        <p>현직 메이저 엔터테인먼트사 멘토와 1:1 파트너십.</p>
+                    </div>
+                    <div class="ab-card">
+                        <span class="ab-icon">◊</span>
+                        <h4>VIRTUAL ENT. COMPANY</h4>
+                        <p>학회 자체가 하나의 가상 엔터테인먼트사로 작동합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ DEPARTMENTS ============ -->
+        <section class="depts-section" id="departments">
+            <div class="section-header">
+                <span class="section-num">02 / DEPARTMENTS</span>
+                <h2 class="section-title">FOUR <span class="outline">PILLARS</span></h2>
+                <p class="section-sub">HYBE, Kakao 등 현실 엔터사 구조를 그대로 반영한 4개 부서 시스템.</p>
+            </div>
+
+            <div class="depts-grid">
+                <article class="dept-card" data-color="business">
+                    <span class="accent-line"></span>
+                    <div class="dept-num">01</div>
+                    <div class="dept-tag">DEPT. 01</div>
+                    <h3 class="dept-name">BUSINESS<br>MANAGEMENT</h3>
+                    <p class="dept-desc">아티스트 IP를 비즈니스로 전환합니다. 음반 유통, 굿즈 전략, 브랜드 협업 — 음악이 어떻게 산업이 되는지를 설계합니다.</p>
+                    <ul class="dept-skills">
+                        <li>BUSINESS STRATEGY</li>
+                        <li>IP COMMERCIALIZATION</li>
+                        <li>BRAND COLLABORATION</li>
+                    </ul>
+                </article>
+
+                <article class="dept-card" data-color="anr">
+                    <span class="accent-line"></span>
+                    <div class="dept-num">02</div>
+                    <div class="dept-tag">DEPT. 02</div>
+                    <h3 class="dept-name">A&amp;R<br>(ARTISTS & REPERTOIRE)</h3>
+                    <p class="dept-desc">트렌드를 읽고 아티스트의 색을 잡습니다. 곡 기획, 컨셉 디렉션, 캐스팅 — 사운드의 방향타를 잡는 부서.</p>
+                    <ul class="dept-skills">
+                        <li>TREND ANALYSIS</li>
+                        <li>CONCEPT DIRECTION</li>
+                        <li>SONG PLANNING</li>
+                    </ul>
+                </article>
+
+                <article class="dept-card" data-color="music">
+                    <span class="accent-line"></span>
+                    <div class="dept-num">03</div>
+                    <div class="dept-tag">DEPT. 03</div>
+                    <h3 class="dept-name">MUSICIAN<br>PRODUCTION</h3>
+                    <p class="dept-desc">실제 트랙을 만듭니다. 작곡, 편곡, 믹싱 — 멜론에 유통 가능한 퀄리티의 음원을 직접 프로듀싱합니다.</p>
+                    <ul class="dept-skills">
+                        <li>COMPOSITION</li>
+                        <li>SOUND DESIGN</li>
+                        <li>MIX & MASTERING</li>
+                    </ul>
+                </article>
+
+                <article class="dept-card" data-color="directing">
+                    <span class="accent-line"></span>
+                    <div class="dept-num">04</div>
+                    <div class="dept-tag">DEPT. 04</div>
+                    <h3 class="dept-name">VISUAL<br>DIRECTING</h3>
+                    <p class="dept-desc">눈에 보이는 모든 것을 디자인합니다. M/V 티저, 무대 연출, 비주얼 컨셉 — KRAFT의 시각적 언어를 구축합니다.</p>
+                    <ul class="dept-skills">
+                        <li>MV DIRECTING</li>
+                        <li>STAGE DESIGN</li>
+                        <li>VISUAL IDENTITY</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- ============ PROGRAM ============ -->
+        <section class="program-section" id="program">
+            <div class="section-header">
+                <span class="section-num">03 / PROGRAM</span>
+                <h2 class="section-title">1-YEAR <span class="outline">CURRICULUM</span></h2>
+                <p class="section-sub">실제 엔터테인먼트 산업의 프로세스를 1년 안에 압축한 3단계 프로그램.</p>
+            </div>
+
+            <div class="phase-track">
+                <div class="phase-line"></div>
+
+                <div class="phase">
+                    <div class="phase-marker">
+                        <span class="phase-dot"></span>
+                        <span class="phase-label">PHASE 01</span>
+                    </div>
+                    <div class="phase-card">
+                        <div class="phase-glow"></div>
+                        <span class="phase-month">SPRING</span>
+                        <h3>SHARED FOUNDATIONS</h3>
+                        <p class="phase-period">기초 다지기</p>
+                        <p>멘토와의 1:1 세션을 통해 자신의 적성과 부서를 발견하고, 4개 부서 전반의 공통 토대를 다집니다.</p>
+                        <div class="phase-meta">
+                            <span>· MENTOR-MENTEE SESSIONS</span>
+                            <span>· DEPARTMENT EXPLORATION</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase">
+                    <div class="phase-marker">
+                        <span class="phase-dot active"></span>
+                        <span class="phase-label">PHASE 02</span>
+                    </div>
+                    <div class="phase-card highlight">
+                        <div class="phase-glow"></div>
+                        <span class="phase-month">SUMMER</span>
+                        <h3>SUMMER INTENSIVE</h3>
+                        <p class="phase-period">가상 엔터사 운영</p>
+                        <p>학회가 하나의 가상 엔터사로 작동합니다. 멜론 유통 가능한 음원, 에이전시 피칭 PPT, M/V 티저까지 — 실제 결과물을 만들어냅니다.</p>
+                        <div class="phase-meta">
+                            <span>· MELON-READY TRACK</span>
+                            <span>· AGENCY PITCH DECK</span>
+                            <span>· MV TEASER</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase">
+                    <div class="phase-marker">
+                        <span class="phase-dot"></span>
+                        <span class="phase-label">PHASE 03</span>
+                    </div>
+                    <div class="phase-card">
+                        <div class="phase-glow"></div>
+                        <span class="phase-month">FALL/WINTER</span>
+                        <h3>INDUSTRY PRACTICE</h3>
+                        <p class="phase-period">실전 진출</p>
+                        <p>현직 종사자와의 직접 네트워킹, 실제 채용으로 이어지는 포트폴리오 제작, KRAFT 동문 커뮤니티 합류.</p>
+                        <div class="phase-meta">
+                            <span>· INDUSTRY NETWORKING</span>
+                            <span>· PORTFOLIO BUILDING</span>
+                            <span>· ALUMNI COMMUNITY</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ JOIN ============ -->
+        <section class="join-section" id="join">
+            <div class="curtain curtain-left"></div>
+            <div class="curtain curtain-right"></div>
+            <div class="join-bg-text">KRAFT&nbsp;&nbsp;SHAPING&nbsp;THE&nbsp;FUTURE</div>
+            <div class="join-inner">
+                <span class="section-num center">04 / JOIN</span>
+                <h2 class="join-title">READY TO <span class="accent">CRAFT</span><br>THE NEXT ERA?</h2>
+                <p class="join-sub">
+                    2026-1기 모집은 마감되었습니다.<br>
+                    <span class="hl">SUMMER 2026</span>에 다시 만나요.
+                </p>
+                <div class="join-cta">
+                    <a href="#" class="explore-btn primary big magnetic">
+                        <span class="btn-bg"></span>
+                        <span class="btn-text">NOTIFY ME — NEXT BATCH</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </a>
+                </div>
+                <div class="socials">
+                    <a href="#" class="social-link">@KRAFT_OFFICIAL</a>
+                    <span class="dot-sep">·</span>
+                    <a href="#" class="social-link">CONTACT</a>
+                    <span class="dot-sep">·</span>
+                    <a href="#" class="social-link">PRESS</a>
+                </div>
+            </div>
+        </section>
+
+        <footer class="site-footer">
+            <div class="foot-left">
+                <div class="nav-logo"><span class="logo-k">K</span><span class="logo-rest">RAFT</span><span class="logo-dot">.</span></div>
+                <p>KOREA UNIVERSITY JOINT ENTERTAINMENT SOCIETY</p>
+            </div>
+            <div class="foot-right">
+                <p>© 2026 KRAFT ENTERTAINMENT. ALL RIGHTS RESERVED.</p>
+                <p class="foot-meta">CRAFTED BEHIND THE STAGE</p>
+            </div>
+        </footer>
     </main>
 
+    <!-- ============ POPUP ============ -->
     <div id="recruit-popup" class="popup-overlay">
         <div class="popup-content">
             <button id="close-popup" class="close-btn">
@@ -82,6 +352,7 @@
         </div>
     </div>
 
+    <!-- ============ MEMBERS OVERLAY ============ -->
     <div id="members-overlay" class="popup-overlay" style="display: none; opacity: 0;">
         <div class="members-content">
             <button id="close-members" class="close-btn">
@@ -95,7 +366,7 @@
                 <p style="color: #888; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 40px;">* CLICK TO REVEAL INFO *</p>
             </div>
 
-            <h3 class="dept-title exec-title">EXECUTIVE BOARD</h3>
+            <h3 class="dept-title-overlay exec-title">EXECUTIVE BOARD</h3>
             <div class="members-grid exec-grid">
                 <div class="member-card-wrapper exec" data-dept="exec">
                     <div class="member-card-inner">
@@ -120,21 +391,20 @@
                 <div class="member-card-wrapper exec" data-dept="exec"><div class="member-card-inner"><div class="member-card-front"><div class="m-glare"></div><div class="m-bg"></div><div class="m-info"><span class="m-role">EXECUTIVE</span><h3 class="m-name">CHLOE</h3></div></div><div class="member-card-back"><h3 class="b-name">CHLOE</h3><p class="b-major">Design</p><div class="b-divider"></div><p class="b-desc">"Visualizing the unseen."</p></div></div></div>
             </div>
 
-            <h3 class="dept-title" style="margin-top: 60px;">1ST GEN CREW</h3>
+            <h3 class="dept-title-overlay" style="margin-top: 60px;">1ST GEN CREW</h3>
             <div class="members-grid crew-grid">
-                
                 <div class="member-card-wrapper" data-dept="business"><div class="member-card-inner"><div class="member-card-front"><div class="m-glare"></div><div class="m-bg"></div><div class="m-info"><span class="m-role">BUSINESS</span><h3 class="m-name">MEMBER 1</h3></div></div><div class="member-card-back"><h3 class="b-name">MEMBER 1</h3><p class="b-major">Economics</p><div class="b-divider"></div><p class="b-desc">"Biz strategy."</p></div></div></div>
                 <div class="member-card-wrapper" data-dept="business"><div class="member-card-inner"><div class="member-card-front"><div class="m-glare"></div><div class="m-bg"></div><div class="m-info"><span class="m-role">BUSINESS</span><h3 class="m-name">MEMBER 2</h3></div></div><div class="member-card-back"><h3 class="b-name">MEMBER 2</h3><p class="b-major">Business</p><div class="b-divider"></div><p class="b-desc">"Data & Logic."</p></div></div></div>
-                
                 <div class="member-card-wrapper" data-dept="anr"><div class="member-card-inner"><div class="member-card-front"><div class="m-glare"></div><div class="m-bg"></div><div class="m-info"><span class="m-role">A&R</span><h3 class="m-name">MEMBER 3</h3></div></div><div class="member-card-back"><h3 class="b-name">MEMBER 3</h3><p class="b-major">Psychology</p><div class="b-divider"></div><p class="b-desc">"Trend setter."</p></div></div></div>
                 <div class="member-card-wrapper" data-dept="anr"><div class="member-card-inner"><div class="member-card-front"><div class="m-glare"></div><div class="m-bg"></div><div class="m-info"><span class="m-role">A&R</span><h3 class="m-name">MEMBER 4</h3></div></div><div class="member-card-back"><h3 class="b-name">MEMBER 4</h3><p class="b-major">Sociology</p><div class="b-divider"></div><p class="b-desc">"Artist matcher."</p></div></div></div>
-
                 <div class="member-card-wrapper" data-dept="music"><div class="member-card-inner"><div class="member-card-front"><div class="m-glare"></div><div class="m-bg"></div><div class="m-info"><span class="m-role">MUSIC</span><h3 class="m-name">MEMBER 5</h3></div></div><div class="member-card-back"><h3 class="b-name">MEMBER 5</h3><p class="b-major">Computer Science</p><div class="b-divider"></div><p class="b-desc">"Sound crafter."</p></div></div></div>
                 <div class="member-card-wrapper" data-dept="music"><div class="member-card-inner"><div class="member-card-front"><div class="m-glare"></div><div class="m-bg"></div><div class="m-info"><span class="m-role">MUSIC</span><h3 class="m-name">MEMBER 6</h3></div></div><div class="member-card-back"><h3 class="b-name">MEMBER 6</h3><p class="b-major">Engineering</p><div class="b-divider"></div><p class="b-desc">"Beat maker."</p></div></div></div>
-
                 <div class="member-card-wrapper" data-dept="directing"><div class="member-card-inner"><div class="member-card-front"><div class="m-glare"></div><div class="m-bg"></div><div class="m-info"><span class="m-role">DIRECTING</span><h3 class="m-name">MEMBER 7</h3></div></div><div class="member-card-back"><h3 class="b-name">MEMBER 7</h3><p class="b-major">Media</p><div class="b-divider"></div><p class="b-desc">"Visionary director."</p></div></div></div>
                 <div class="member-card-wrapper" data-dept="directing"><div class="member-card-inner"><div class="member-card-front"><div class="m-glare"></div><div class="m-bg"></div><div class="m-info"><span class="m-role">DIRECTING</span><h3 class="m-name">MEMBER 8</h3></div></div><div class="member-card-back"><h3 class="b-name">MEMBER 8</h3><p class="b-major">Art & Design</p><div class="b-divider"></div><p class="b-desc">"Visual storyteller."</p></div></div></div>
-                
-                </div>
+            </div>
         </div>
     </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
