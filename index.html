@@ -15,6 +15,19 @@
     <div class="bg-noise"></div>
     <div class="cursor-glow" id="cursor-glow"></div>
 
+    <!-- ============ INTRO CINEMATIC OVERLAY ============ -->
+    <div class="intro-overlay" id="intro-overlay">
+        <div class="intro-flash"></div>
+        <div class="intro-bars">
+            <div class="ibar"></div><div class="ibar"></div><div class="ibar"></div>
+            <div class="ibar"></div><div class="ibar"></div>
+        </div>
+        <div class="intro-text">
+            <span class="intro-line">KRAFT</span>
+            <span class="intro-sub">SHAPING THE FUTURE</span>
+        </div>
+    </div>
+
     <main id="main-site">
         <div class="ambient-light" id="ambient-light"></div>
         <div class="stardust"></div>
@@ -35,26 +48,74 @@
 
         <!-- ============ HERO ============ -->
         <section class="hero-section" id="hero">
-            <div class="stage-lights">
-                <div class="beam beam-1"></div>
-                <div class="beam beam-2"></div>
-                <div class="beam beam-3"></div>
-                <div class="beam beam-4"></div>
+            <!-- Stage floor (gradient base under everything) -->
+            <div class="stage-floor"></div>
+
+            <!-- Spotlights mounted from top of stage -->
+            <div class="spotlights" aria-hidden="true">
+                <div class="spotlight sp-1"></div>
+                <div class="spotlight sp-2"></div>
+                <div class="spotlight sp-3"></div>
             </div>
 
-            <div class="floating-tags">
-                <span class="ftag" style="top:18%;left:6%;">● LIVE</span>
-                <span class="ftag" style="top:28%;right:8%;">REC ●</span>
-                <span class="ftag" style="bottom:24%;left:4%;">CH.01</span>
-                <span class="ftag" style="bottom:18%;right:6%;">EST. 2026</span>
+            <!-- Concert volumetric light cones -->
+            <svg class="light-cones" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                <defs>
+                    <linearGradient id="cone-red" x1="0.5" y1="0" x2="0.5" y2="1">
+                        <stop offset="0%" stop-color="#FF1E56" stop-opacity="0.5"/>
+                        <stop offset="100%" stop-color="#FF1E56" stop-opacity="0"/>
+                    </linearGradient>
+                    <linearGradient id="cone-cyan" x1="0.5" y1="0" x2="0.5" y2="1">
+                        <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.4"/>
+                        <stop offset="100%" stop-color="#00E5FF" stop-opacity="0"/>
+                    </linearGradient>
+                    <linearGradient id="cone-purple" x1="0.5" y1="0" x2="0.5" y2="1">
+                        <stop offset="0%" stop-color="#D900FF" stop-opacity="0.45"/>
+                        <stop offset="100%" stop-color="#D900FF" stop-opacity="0"/>
+                    </linearGradient>
+                </defs>
+                <polygon class="cone cone-1" points="20,0 0,100 30,100" fill="url(#cone-red)"/>
+                <polygon class="cone cone-2" points="50,0 35,100 65,100" fill="url(#cone-cyan)"/>
+                <polygon class="cone cone-3" points="80,0 70,100 100,100" fill="url(#cone-purple)"/>
+            </svg>
+
+            <!-- Lens flare bursts (positioned behind text) -->
+            <div class="lens-flare lf-1"></div>
+            <div class="lens-flare lf-2"></div>
+
+            <!-- Glow particles rising from stage -->
+            <div class="particles" aria-hidden="true">
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
             </div>
 
+            <!-- Side info HUD (won't overlap text) -->
+            <aside class="side-hud left-hud" aria-hidden="true">
+                <div class="hud-row"><span class="hud-dot live"></span> <span>ON AIR</span></div>
+                <div class="hud-row hud-vert">EST · 2026</div>
+                <div class="hud-row hud-vert">CH.01</div>
+            </aside>
+
+            <aside class="side-hud right-hud" aria-hidden="true">
+                <div class="hud-time" id="hud-time">--:--:--</div>
+                <div class="hud-bpm">
+                    <span>BPM</span>
+                    <strong id="hud-bpm">128</strong>
+                </div>
+                <div class="hud-eq">
+                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+            </aside>
+
+            <!-- Background marquee (large, faded, behind everything) -->
             <div class="marquee-container">
                 <div class="marquee-text">
-                    KRAFT, SHAPING THE FUTURE&nbsp;&nbsp;/&nbsp;&nbsp;KRAFT, SHAPING THE FUTURE&nbsp;&nbsp;/&nbsp;&nbsp;KRAFT, SHAPING THE FUTURE&nbsp;&nbsp;/&nbsp;&nbsp;
+                    KRAFT&nbsp;·&nbsp;SHAPING THE FUTURE&nbsp;·&nbsp;KRAFT&nbsp;·&nbsp;SHAPING THE FUTURE&nbsp;·&nbsp;
                 </div>
             </div>
-            
+
+            <!-- Main content -->
             <div class="hero-content">
                 <div class="hero-tag">
                     <span class="tag-dot"></span>
@@ -62,9 +123,18 @@
                 </div>
                 <h1 class="hero-title">
                     <span class="line line-1">
-                        <span class="glitch" data-text="BEYOND">BEYOND</span>
+                        <span class="char-wrap">
+                            <span class="char">B</span><span class="char">E</span><span class="char">Y</span><span class="char">O</span><span class="char">N</span><span class="char">D</span>
+                        </span>
                     </span>
-                    <span class="line line-2">THE <span class="accent">STAGE</span></span>
+                    <span class="line line-2">
+                        <span class="char-wrap">
+                            <span class="char">T</span><span class="char">H</span><span class="char">E</span>
+                        </span>
+                        <span class="char-wrap accent-wrap">
+                            <span class="char accent-char">S</span><span class="char accent-char">T</span><span class="char accent-char">A</span><span class="char accent-char">G</span><span class="char accent-char">E</span>
+                        </span>
+                    </span>
                 </h1>
                 <p class="hero-sub">
                     팬에서 <span class="hl">아키텍트</span>로.<br>
@@ -77,19 +147,16 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </a>
                     <a href="#program" class="explore-btn secondary magnetic">
+                        <span class="btn-bg"></span>
                         <span class="btn-text">SEE PROGRAM</span>
                     </a>
                 </div>
                 <div class="hero-stats">
                     <div class="stat"><strong>04</strong><span>DEPARTMENTS</span></div>
+                    <div class="stat-sep"></div>
                     <div class="stat"><strong>03</strong><span>PHASES</span></div>
+                    <div class="stat-sep"></div>
                     <div class="stat"><strong>2026</strong><span>1ST GEN</span></div>
-                </div>
-
-                <div class="audio-bars" aria-hidden="true">
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span>
                 </div>
             </div>
 
@@ -105,7 +172,6 @@
                 <span class="section-num">01 / ABOUT</span>
                 <h2 class="section-title">WHO <span class="outline">WE ARE</span></h2>
             </div>
-
             <div class="about-grid">
                 <div class="about-text">
                     <p class="lead">
@@ -144,7 +210,6 @@
                 <h2 class="section-title">FOUR <span class="outline">PILLARS</span></h2>
                 <p class="section-sub">현실 엔터사 구조를 그대로 반영한 4개 부서 시스템.</p>
             </div>
-
             <div class="depts-grid">
                 <article class="dept-card" data-color="business">
                     <span class="accent-line"></span>
@@ -158,7 +223,6 @@
                         <li>BRAND COLLABORATION</li>
                     </ul>
                 </article>
-
                 <article class="dept-card" data-color="anr">
                     <span class="accent-line"></span>
                     <div class="dept-num">02</div>
@@ -171,7 +235,6 @@
                         <li>SONG PLANNING</li>
                     </ul>
                 </article>
-
                 <article class="dept-card" data-color="music">
                     <span class="accent-line"></span>
                     <div class="dept-num">03</div>
@@ -184,7 +247,6 @@
                         <li>MIX & MASTERING</li>
                     </ul>
                 </article>
-
                 <article class="dept-card" data-color="directing">
                     <span class="accent-line"></span>
                     <div class="dept-num">04</div>
@@ -207,10 +269,8 @@
                 <h2 class="section-title">1-YEAR <span class="outline">CURRICULUM</span></h2>
                 <p class="section-sub">실제 엔터테인먼트 산업의 프로세스를 1년 안에 압축한 3단계 프로그램.</p>
             </div>
-
             <div class="phase-track">
                 <div class="phase-line"></div>
-
                 <div class="phase">
                     <div class="phase-marker">
                         <span class="phase-dot"></span>
@@ -228,7 +288,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="phase">
                     <div class="phase-marker">
                         <span class="phase-dot active"></span>
@@ -247,7 +306,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="phase">
                     <div class="phase-marker">
                         <span class="phase-dot"></span>
@@ -359,38 +417,23 @@
                 <span>CLOSE</span>
                 <div class="close-icon"></div>
             </button>
-            
             <div class="members-header">
                 <div class="status-badge">THE PIONEERS</div>
                 <h2 class="main-title" style="font-size: 3.5rem; margin-bottom: 20px;">KRAFT CREW</h2>
                 <p style="color: #888; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 40px;">* CLICK TO REVEAL INFO *</p>
             </div>
-
             <h3 class="dept-title-overlay exec-title">EXECUTIVE BOARD</h3>
             <div class="members-grid exec-grid">
                 <div class="member-card-wrapper exec" data-dept="exec">
                     <div class="member-card-inner">
-                        <div class="member-card-front">
-                            <div class="m-glare"></div>
-                            <div class="m-bg"></div>
-                            <div class="m-info">
-                                <span class="m-role">PRESIDENT</span>
-                                <h3 class="m-name">JOSHUA</h3>
-                            </div>
-                        </div>
-                        <div class="member-card-back">
-                            <h3 class="b-name">JOSHUA</h3>
-                            <p class="b-major">Business Administration</p>
-                            <div class="b-divider"></div>
-                            <p class="b-desc">"Leading the new era of KRAFT Universe."</p>
-                        </div>
+                        <div class="member-card-front"><div class="m-glare"></div><div class="m-bg"></div><div class="m-info"><span class="m-role">PRESIDENT</span><h3 class="m-name">JOSHUA</h3></div></div>
+                        <div class="member-card-back"><h3 class="b-name">JOSHUA</h3><p class="b-major">Business Administration</p><div class="b-divider"></div><p class="b-desc">"Leading the new era of KRAFT Universe."</p></div>
                     </div>
                 </div>
                 <div class="member-card-wrapper exec" data-dept="exec"><div class="member-card-inner"><div class="member-card-front"><div class="m-glare"></div><div class="m-bg"></div><div class="m-info"><span class="m-role">VICE PRESIDENT</span><h3 class="m-name">ALICE</h3></div></div><div class="member-card-back"><h3 class="b-name">ALICE</h3><p class="b-major">Media & Communication</p><div class="b-divider"></div><p class="b-desc">"Creative master of KRAFT."</p></div></div></div>
                 <div class="member-card-wrapper exec" data-dept="exec"><div class="member-card-inner"><div class="member-card-front"><div class="m-glare"></div><div class="m-bg"></div><div class="m-info"><span class="m-role">EXECUTIVE</span><h3 class="m-name">DEVIN</h3></div></div><div class="member-card-back"><h3 class="b-name">DEVIN</h3><p class="b-major">Computer Science</p><div class="b-divider"></div><p class="b-desc">"Logic meets Art."</p></div></div></div>
                 <div class="member-card-wrapper exec" data-dept="exec"><div class="member-card-inner"><div class="member-card-front"><div class="m-glare"></div><div class="m-bg"></div><div class="m-info"><span class="m-role">EXECUTIVE</span><h3 class="m-name">CHLOE</h3></div></div><div class="member-card-back"><h3 class="b-name">CHLOE</h3><p class="b-major">Design</p><div class="b-divider"></div><p class="b-desc">"Visualizing the unseen."</p></div></div></div>
             </div>
-
             <h3 class="dept-title-overlay" style="margin-top: 60px;">1ST GEN CREW</h3>
             <div class="members-grid crew-grid">
                 <div class="member-card-wrapper" data-dept="business"><div class="member-card-inner"><div class="member-card-front"><div class="m-glare"></div><div class="m-bg"></div><div class="m-info"><span class="m-role">BUSINESS</span><h3 class="m-name">MEMBER 1</h3></div></div><div class="member-card-back"><h3 class="b-name">MEMBER 1</h3><p class="b-major">Economics</p><div class="b-divider"></div><p class="b-desc">"Biz strategy."</p></div></div></div>
